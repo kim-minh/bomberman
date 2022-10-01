@@ -1,36 +1,38 @@
-package com.oop.bomberman.Graphics;
+package com.oop.bomberman.graphics;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
+import com.oop.bomberman.Bomberman;
+import javafx.scene.image.Image;
+import java.io.InputStream;
 
 public class SpriteSheet {
+    private final String PATH;
+    private final int SIZE;
+    public final int[] pixels;
 
-	private String _path;
-	public final int SIZE;
-	public int[] _pixels;
-	public BufferedImage image;
+    public static SpriteSheet spriteSheet = new SpriteSheet("textures/classic.png", 256);
 
-	public static SpriteSheet tiles = new SpriteSheet("/textures/classic.png", 256);
-	
-	public SpriteSheet(String path, int size) {
-		_path = path;
-		SIZE = size;
-		_pixels = new int[SIZE * SIZE];
-		load();
-	}
-	
-	private void load() {
-		try {
-			URL a = SpriteSheet.class.getResource(_path);
-			image = ImageIO.read(a);
-			int w = image.getWidth();
-			int h = image.getHeight();
-			image.getRGB(0, 0, w, h, _pixels, 0, w);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
-	}
+    public SpriteSheet(String PATH, int SIZE) {
+        this.PATH = PATH;
+        this.SIZE = SIZE;
+        pixels = new int[SIZE * SIZE];
+        load();
+    }
+
+    private void load() {
+        InputStream inputImage = Bomberman.class.getResourceAsStream(PATH);
+
+        assert inputImage != null;
+        Image image = new Image(inputImage);
+
+        //Get RGB color from image
+        for (int y = 0; y < SIZE; ++y) {
+            for(int x = 0; x < SIZE; ++x) {
+                pixels[x + y * SIZE] = image.getPixelReader().getArgb(x, y);
+            }
+        }
+    }
+
+    public int getSIZE() {
+        return SIZE;
+    }
 }
