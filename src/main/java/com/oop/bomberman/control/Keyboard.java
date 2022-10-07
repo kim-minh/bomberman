@@ -1,37 +1,34 @@
 package com.oop.bomberman.control;
 
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 
 public class Keyboard {
+    public static boolean pressed;
+    public static boolean goUp;
+    public static boolean goDown;
+    public static boolean goLeft;
+    public static boolean goRight;
 
     public static Keyboard keyboard = new Keyboard();
 
-    public static boolean goUp, goDown, goLeft, goRight;
-
     public void handle(Scene scene) {
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case W: goUp = true; break;
-                    case S: goDown = true; break;
-                    case A: goRight = true; break;
-                    case D: goLeft = true; break;
-                }
+        scene.setOnKeyPressed(event -> {
+            pressed = true;
+            switch (event.getCode()) {
+                case W -> goUp = true;
+                case S -> goDown = true;
+                case A -> goLeft = true;
+                case D -> goRight = true;
             }
         });
 
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case W:    goUp = false; break;
-                    case S:  goDown = false; break;
-                    case A:  goRight = false; break;
-                    case D: goLeft = false; break;
-                }
+        scene.setOnKeyReleased(event -> {
+            pressed = false;
+            switch (event.getCode()) {
+                case W -> goUp = false;
+                case S -> goDown = false;
+                case A -> goLeft = false;
+                case D -> goRight = false;
             }
         });
     }
