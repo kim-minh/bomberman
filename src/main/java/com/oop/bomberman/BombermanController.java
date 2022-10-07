@@ -1,23 +1,23 @@
 package com.oop.bomberman;
 
-import com.oop.bomberman.graphics.Sprite;
+import com.oop.bomberman.control.Coordinate;
+import com.oop.bomberman.entities.Player;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 public class BombermanController {
     @FXML
     private Canvas canvas;
 
-    public void setImageView() {
+    public void update() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        Image image = Sprite.player_right.getTexture();
-        gc.drawImage(image, 0, 0);
+        Player player = new Player(new Coordinate(0, 0), gc);
+        player.animate();
     }
 
     @FXML
     public void initialize() {
-        setImageView();
+        update();
     }
 }
