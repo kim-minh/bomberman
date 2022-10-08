@@ -1,13 +1,12 @@
 package com.oop.bomberman;
 
+import com.oop.bomberman.control.Keyboard;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
-
-import static com.oop.bomberman.control.Keyboard.keyboard;
 
 public class Bomberman extends Application {
     @Override
@@ -16,6 +15,7 @@ public class Bomberman extends Application {
         AnchorPane root = fxmlLoader.load();
 
         Scene scene = new Scene(root, 800, 600);
+        Keyboard keyboard = new Keyboard();
         keyboard.handle(scene);
 
         stage.setTitle("Bomberman");

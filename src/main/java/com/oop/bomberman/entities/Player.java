@@ -1,21 +1,21 @@
 package com.oop.bomberman.entities;
 
 import com.oop.bomberman.control.Coordinate;
+import com.oop.bomberman.control.Keyboard;
 import com.oop.bomberman.graphics.Sprite;
-import javafx.scene.canvas.GraphicsContext;
-
+import javafx.scene.canvas.Canvas;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends Entity{
-
+public class Player extends AnimatedEntity {
     /**
      * Initialize object.
      *
      * @param coordinate Coordinate
+     * @param canvas canvas
      */
-    public Player(Coordinate coordinate, GraphicsContext gc) {
-        super(coordinate, gc);
+    public Player(Coordinate coordinate, Canvas canvas) {
+        super(coordinate, canvas);
 
         //Initialize up animation
         List<Sprite> up = new ArrayList<>();
@@ -42,6 +42,17 @@ public class Player extends Entity{
         sprites.add(down);
         sprites.add(left);
         sprites.add(right);
+
+    }
+
+    @Override
+    public void animate() {
+        isMoving = Keyboard.pressed;
+        goUp = Keyboard.up;
+        goDown = Keyboard.down;
+        goLeft = Keyboard.left;
+        goRight = Keyboard.right;
+        super.animate();
     }
 
     @Override

@@ -4,31 +4,29 @@ import javafx.scene.Scene;
 
 public class Keyboard {
     public static boolean pressed;
-    public static boolean goUp;
-    public static boolean goDown;
-    public static boolean goLeft;
-    public static boolean goRight;
-
-    public static Keyboard keyboard = new Keyboard();
+    public static boolean up;
+    public static boolean down;
+    public static boolean left;
+    public static boolean right;
 
     public void handle(Scene scene) {
         scene.setOnKeyPressed(event -> {
             pressed = true;
             switch (event.getCode()) {
-                case W, UP -> goUp = true;
-                case S, DOWN -> goDown = true;
-                case A, LEFT -> goLeft = true;
-                case D, RIGHT -> goRight = true;
+                case W, UP -> up = true;
+                case S, DOWN -> down = true;
+                case A, LEFT -> left = true;
+                case D, RIGHT -> right = true;
             }
         });
 
         scene.setOnKeyReleased(event -> {
             pressed = false;
             switch (event.getCode()) {
-                case W, UP -> goUp = false;
-                case S, DOWN -> goDown = false;
-                case A, LEFT -> goLeft = false;
-                case D, RIGHT -> goRight = false;
+                case W, UP -> up = false;
+                case S, DOWN -> down = false;
+                case A, LEFT -> left = false;
+                case D, RIGHT -> right = false;
             }
         });
     }
