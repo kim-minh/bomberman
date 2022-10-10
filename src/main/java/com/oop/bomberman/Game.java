@@ -14,6 +14,7 @@ public class Game {
     public Game(GraphicsContext gc) {
         this.gc = gc;
     }
+
     public void update() {
         for(int i = 0; i < 800; i += 32) {
             Entity.entityList.add(new Wall(new Coordinate(i, 0), gc));

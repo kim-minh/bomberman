@@ -5,8 +5,6 @@ import com.oop.bomberman.graphics.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Explosion {
-    int tileSize = Sprite.SCALED_SIZE;
-
     /**
      * Initialize object.
      *
@@ -14,6 +12,8 @@ public class Explosion {
      * @param gc         GraphicContext
      */
     public Explosion(Coordinate coordinate, GraphicsContext gc) {
+        int tileSize = Sprite.SCALED_SIZE;
+
         new ExplodeDirection(coordinate, 0, gc);
         new ExplodeDirection(new Coordinate(coordinate.getX() - tileSize, coordinate.getY()), 1, gc);
         new ExplodeDirection(new Coordinate(coordinate.getX() + tileSize, coordinate.getY()), 1, gc);

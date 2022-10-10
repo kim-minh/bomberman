@@ -2,37 +2,38 @@ package com.oop.bomberman.graphics;
 
 import com.oop.bomberman.Bomberman;
 import javafx.scene.image.Image;
+
 import java.io.InputStream;
 
 public class SpriteSheet {
-    private final String PATH;
-    private final int SIZE;
+    private final String path;
+    private final int size;
     public final int[] pixels;
 
     public static SpriteSheet spriteSheet = new SpriteSheet("textures/classic.png", 256);
 
-    public SpriteSheet(String PATH, int SIZE) {
-        this.PATH = PATH;
-        this.SIZE = SIZE;
-        pixels = new int[SIZE * SIZE];
+    public SpriteSheet(String path, int size) {
+        this.path = path;
+        this.size = size;
+        pixels = new int[size * size];
         load();
     }
 
     private void load() {
-        InputStream inputImage = Bomberman.class.getResourceAsStream(PATH);
+        InputStream inputImage = Bomberman.class.getResourceAsStream(path);
 
         assert inputImage != null;
         Image image = new Image(inputImage);
 
         //Get RGB color from image
-        for (int y = 0; y < SIZE; ++y) {
-            for(int x = 0; x < SIZE; ++x) {
-                pixels[x + y * SIZE] = image.getPixelReader().getArgb(x, y);
+        for (int y = 0; y < size; ++y) {
+            for(int x = 0; x < size; ++x) {
+                pixels[x + y * size] = image.getPixelReader().getArgb(x, y);
             }
         }
     }
 
-    public int getSIZE() {
-        return SIZE;
+    public int getSize() {
+        return size;
     }
 }

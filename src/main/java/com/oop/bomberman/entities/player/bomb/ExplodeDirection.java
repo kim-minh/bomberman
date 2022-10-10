@@ -16,7 +16,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ExplodeDirection extends AnimatedEntity {
-    public boolean flag;
+    private boolean flag;
+
     /**
      * Initialize object.
      *
@@ -56,13 +57,16 @@ public class ExplodeDirection extends AnimatedEntity {
         disappearTimer.schedule(disappearTask, 500L);
     }
 
+    public boolean flagged() {
+        return flag;
+    }
+
     public boolean collide(Entity e) {
         return collide(e, this.getCoordinate().getX(), this.getCoordinate().getY());
     }
 
     @Override
     public void update() {
-        //boolean flag = false;
         for (Entity e : entityList) {
             if (collide(e)) {
                 if (e instanceof Wall) {

@@ -181,7 +181,7 @@ public class Sprite {
     public static Sprite powerup_bombpass = new Sprite(5, 10);
     public static Sprite powerup_flamepass = new Sprite(6, 10);
 
-    public Sprite(int x, int y) {
+    private Sprite(int x, int y) {
         X = x * DEFAULT_SIZE;
         Y = y * DEFAULT_SIZE;
         pixels = new int[DEFAULT_SIZE * DEFAULT_SIZE];
@@ -190,7 +190,7 @@ public class Sprite {
 
     private void load() {
         for (int y = 0; y < DEFAULT_SIZE; ++y) {
-			System.arraycopy(spriteSheet.pixels, X + (y + Y) * spriteSheet.getSIZE(), pixels, y * 16, DEFAULT_SIZE);
+			System.arraycopy(spriteSheet.pixels, X + (y + Y) * spriteSheet.getSize(), pixels, y * 16, DEFAULT_SIZE);
         }
     }
 
@@ -219,7 +219,7 @@ public class Sprite {
      * @param inputImage input image
      * @return An upscaled image
      */
-    public Image upscale(WritableImage inputImage) {
+    private Image upscale(WritableImage inputImage) {
         final int width = (int) inputImage.getWidth();
         final int height = (int) inputImage.getHeight();
 

@@ -47,7 +47,7 @@ public abstract class Entity {
 
         entityList.removeAll(toRemove);
         for (Entity e : toRemove) {
-            if(e instanceof ExplodeDirection && ((ExplodeDirection) e).flag) {
+            if(e instanceof ExplodeDirection && ((ExplodeDirection) e).flagged()) {
                 continue;
             }
             e.clear();
