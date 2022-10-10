@@ -13,6 +13,7 @@ import java.util.TimerTask;
 
 public class Bomb extends AnimatedEntity {
     private final Bomb bomb = this;
+    public static int bombCount;
 
     /**
      * Initialize object.
@@ -23,6 +24,7 @@ public class Bomb extends AnimatedEntity {
     public Bomb(Coordinate coordinate, GraphicsContext gc) {
         super(coordinate, true, gc);
         direction = 0;
+        ++bombCount;
 
         TimerTask explodeTask = new TimerTask() {
             @Override
@@ -31,6 +33,7 @@ public class Bomb extends AnimatedEntity {
                     clear();
                     new Explosion(bomb.coordinate, gc);
                     toRemove.add(bomb);
+                    --bombCount;
                 });
             }
         };

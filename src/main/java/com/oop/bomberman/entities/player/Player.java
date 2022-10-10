@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends AnimatedEntity {
+    private int maxBombs;
+
     /**
      * Initialize object.
      *
@@ -21,6 +23,7 @@ public class Player extends AnimatedEntity {
     public Player(Coordinate coordinate, GraphicsContext gc) {
         super(coordinate, false, gc);
         speed = 1.2;
+        maxBombs = 1;
 
         //Initialize up animation sprites
         List<Sprite> up = new ArrayList<>();
@@ -53,6 +56,10 @@ public class Player extends AnimatedEntity {
 
     }
 
+    public void setMaxBombs(int maxBombs) {
+        this.maxBombs = maxBombs;
+    }
+
     @Override
     public boolean collide(Entity e, double x, double y) {
         if (e instanceof Bomb) {
@@ -68,7 +75,7 @@ public class Player extends AnimatedEntity {
         goDown = Control.down;
         goLeft = Control.left;
         goRight = Control.right;
-        if (Control.bomb) {
+        if (Control.bomb && Bomb.bombCount < maxBombs) {
             new Bomb(coordinate, gc);
             Control.bomb = false;
         }
