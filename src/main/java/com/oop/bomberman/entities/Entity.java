@@ -43,7 +43,6 @@ public abstract class Entity {
 
     public static void updateList() {
         entityList.addAll(0, toAdd);
-        toAdd.clear();
 
         entityList.removeAll(toRemove);
         for (Entity e : toRemove) {
@@ -52,6 +51,8 @@ public abstract class Entity {
             }
             e.clear();
         }
+
+        toAdd.clear();
         toRemove.clear();
     }
 

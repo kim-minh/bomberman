@@ -6,6 +6,8 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class AnimatedEntity extends Entity {
     protected List<List<Sprite>> spritesList;
@@ -16,8 +18,9 @@ public abstract class AnimatedEntity extends Entity {
     protected boolean isMoving;
     protected double speed;
     protected int direction = 3;
-    protected int frame = 0;
     protected boolean canMove;
+    public boolean isRemoved;
+    protected int frame = 0;
 
     /**
      * Initialize object.
@@ -32,8 +35,13 @@ public abstract class AnimatedEntity extends Entity {
     }
 
     public void update() {
-
         double dx = 0, dy = 0;
+
+        if (isRemoved) {
+            direction = 4;
+            deadAnimate();
+            return;
+        }
 
         if (goUp) {
             dy -= speed;
@@ -70,6 +78,20 @@ public abstract class AnimatedEntity extends Entity {
         }
     }
 
+    protected void deadAnimate() {
+        Entity entity = this;
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                toRemove.add(entity);
+            }
+        };
+        timer.schedule(task, 400);
+        animate();
+        render();
+    }
+
     private void moveBy(double dx, double dy) {
         if (dx == 0 && dy == 0) return;
 
@@ -97,10 +119,11 @@ public abstract class AnimatedEntity extends Entity {
             return false;
         }
         Coordinate other = e.getCoordinate();
-        canMove = x < other.getX() + Sprite.SCALED_SIZE &&
-                x + Sprite.SCALED_SIZE > other.getX() &&
-                y < other.getY() + Sprite.SCALED_SIZE &&
-                y + Sprite.SCALED_SIZE > other.getY();
+        int spriteSize = Sprite.SCALED_SIZE;
+        canMove = x < other.getX() + spriteSize &&
+                x + spriteSize > other.getX() &&
+                y < other.getY() + spriteSize &&
+                y + spriteSize > other.getY();
         return canMove;
     }
 

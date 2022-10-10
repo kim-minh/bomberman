@@ -49,11 +49,16 @@ public class Player extends AnimatedEntity {
         right.add(Sprite.player_right_1);
         right.add(Sprite.player_right_2);
 
+        List<Sprite> dead = new ArrayList<>();
+        dead.add(Sprite.player_dead1);
+        dead.add(Sprite.player_dead2);
+        dead.add(Sprite.player_dead3);
+
         spritesList.add(up);
         spritesList.add(down);
         spritesList.add(left);
         spritesList.add(right);
-
+        spritesList.add(dead);
     }
 
     public void setMaxBombs(int maxBombs) {

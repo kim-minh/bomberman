@@ -32,9 +32,16 @@ public class Balloom extends Enemy {
         right.add(Sprite.balloom_right2);
         right.add(Sprite.balloom_right3);
 
+        List<Sprite> dead = new ArrayList<>();
+        dead.add(Sprite.balloom_dead);
+        dead.add(Sprite.mob_dead1);
+        dead.add(Sprite.mob_dead2);
+        dead.add(Sprite.mob_dead3);
+
         spritesList.add(left);
         spritesList.add(right);
         spritesList.add(left);
         spritesList.add(right);
+        spritesList.add(dead);
     }
 }

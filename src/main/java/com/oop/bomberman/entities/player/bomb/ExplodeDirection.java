@@ -3,8 +3,6 @@ package com.oop.bomberman.entities.player.bomb;
 import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
-import com.oop.bomberman.entities.enemies.Enemy;
-import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Wall;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
@@ -71,9 +69,8 @@ public class ExplodeDirection extends AnimatedEntity {
             if (collide(e)) {
                 if (e instanceof Wall) {
                     flag = true;
-                }
-                if (e instanceof Enemy || e instanceof Player) {
-                    toRemove.add(e);
+                } else {
+                    ((AnimatedEntity) e).isRemoved = true;
                 }
             }
         }

@@ -4,6 +4,7 @@ import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.Balloom;
 import com.oop.bomberman.entities.player.Player;
+import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.Wall;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
@@ -28,6 +29,7 @@ public class Game {
         new Player(new Coordinate(32, 32), gc);
         new Balloom(new Coordinate(300, 32), gc);
         new Balloom(new Coordinate(200, 32), gc);
+        new Brick(new Coordinate(64, 32), gc);
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
