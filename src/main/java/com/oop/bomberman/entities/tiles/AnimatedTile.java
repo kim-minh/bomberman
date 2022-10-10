@@ -4,7 +4,7 @@ import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
 import javafx.scene.canvas.GraphicsContext;
 
-public class AnimatedTile extends AnimatedEntity {
+public abstract class AnimatedTile extends AnimatedEntity {
     /**
      * Initialize object.
      *
