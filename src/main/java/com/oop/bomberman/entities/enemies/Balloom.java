@@ -16,8 +16,9 @@ public class Balloom extends Enemy {
      * @param gc         GraphicContext
      */
     public Balloom(Coordinate coordinate, GraphicsContext gc) {
-        super(coordinate, gc);
-        ai = new LowAI(6 * Sprite.SCALED_SIZE);
+        super(coordinate, false, gc);
+        ai = new LowAI(5 * Sprite.SCALED_SIZE);
+        speed = 0.5;
 
         //Initialize left animation sprites
         List<Sprite> left = new ArrayList<>();

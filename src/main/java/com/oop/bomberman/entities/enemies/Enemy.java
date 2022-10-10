@@ -2,7 +2,6 @@ package com.oop.bomberman.entities.enemies;
 
 import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
-import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.AI.AI;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -13,19 +12,11 @@ public abstract class Enemy extends AnimatedEntity {
      * Initialize object.
      *
      * @param coordinate coordinate
+     * @param spawned    spawned
      * @param gc         GraphicContext
      */
-    public Enemy(Coordinate coordinate, GraphicsContext gc) {
-        super(coordinate, gc);
-        speed = 1;
-    }
-
-    @Override
-    public boolean collide(Entity e, double x, double y) {
-        if (e instanceof Enemy) {
-            return false;
-        }
-        return super.collide(e, x, y);
+    public Enemy(Coordinate coordinate, boolean spawned, GraphicsContext gc) {
+        super(coordinate, spawned, gc);
     }
 
     public void update() {
@@ -37,7 +28,7 @@ public abstract class Enemy extends AnimatedEntity {
         goLeft = ai.goLeft;
         isMoving = ai.isMoving;
 
-        if (isCollide) {
+        if (canMove) {
             ai.isMoving = false;
         }
 

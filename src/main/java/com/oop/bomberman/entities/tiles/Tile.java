@@ -18,7 +18,7 @@ public abstract class Tile extends Entity {
      * @param gc         GraphicContext
      */
     public Tile(Coordinate coordinate, GraphicsContext gc) {
-        super(coordinate, gc);
+        super(coordinate, false, gc);
         spritesList = new ArrayList<>();
     }
 

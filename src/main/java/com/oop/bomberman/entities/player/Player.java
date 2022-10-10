@@ -1,7 +1,10 @@
-package com.oop.bomberman.entities;
+package com.oop.bomberman.entities.player;
 
 import com.oop.bomberman.control.Control;
 import com.oop.bomberman.control.Coordinate;
+import com.oop.bomberman.entities.AnimatedEntity;
+import com.oop.bomberman.entities.Entity;
+import com.oop.bomberman.entities.player.bomb.Bomb;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -16,8 +19,8 @@ public class Player extends AnimatedEntity {
      * @param gc         GraphicContext
      */
     public Player(Coordinate coordinate, GraphicsContext gc) {
-        super(coordinate, gc);
-        speed = 1.5;
+        super(coordinate, false, gc);
+        speed = 1.2;
 
         //Initialize up animation sprites
         List<Sprite> up = new ArrayList<>();
@@ -51,12 +54,24 @@ public class Player extends AnimatedEntity {
     }
 
     @Override
+    public boolean collide(Entity e, double x, double y) {
+        if (e instanceof Bomb) {
+            return false;
+        }
+        return super.collide(e, x, y);
+    }
+
+    @Override
     public void update() {
         isMoving = Control.move;
         goUp = Control.up;
         goDown = Control.down;
         goLeft = Control.left;
         goRight = Control.right;
+        if (Control.bomb) {
+            new Bomb(coordinate, gc);
+            Control.bomb = false;
+        }
         super.update();
     }
 }
