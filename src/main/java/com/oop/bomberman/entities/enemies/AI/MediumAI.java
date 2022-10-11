@@ -21,11 +21,19 @@ public class MediumAI extends AI {
             steps = 0;
             return -1;
         }
-
-        int direction = calculateRow();
+        int rand = random.nextInt(2);
+        int direction;
+        if (rand == 1) {
+            direction = calculateRow();
             if (direction == -1) {
                 direction = calculateCol();
             }
+        } else {
+            direction = calculateCol();
+            if (direction == -1) {
+                direction = calculateRow();
+            }
+        }
         return direction;
     }
 
