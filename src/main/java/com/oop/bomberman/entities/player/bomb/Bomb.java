@@ -4,7 +4,6 @@ import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
-import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +11,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Bomb extends AnimatedEntity {
-    private final Bomb bomb = this;
     public static int bombCount;
 
     /**
      * Initialize object.
      *
      * @param coordinate coordinate
-     * @param gc         GraphicContext
      */
-    public Bomb(Coordinate coordinate, GraphicsContext gc) {
-        super(coordinate, true, gc);
+    public Bomb(Coordinate coordinate) {
+        super(coordinate, true);
+        final Bomb bomb = this;
         direction = 0;
         ++bombCount;
 
@@ -31,7 +29,7 @@ public class Bomb extends AnimatedEntity {
             public void run() {
                 Platform.runLater(() -> {
                     clear();
-                    new Explosion(bomb.coordinate, gc);
+                    new Explosion(bomb.coordinate);
                     toRemove.add(bomb);
                     --bombCount;
                 });

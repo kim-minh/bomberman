@@ -3,7 +3,6 @@ package com.oop.bomberman.entities.tiles;
 import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.graphics.Sprite;
-import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +14,9 @@ public abstract class Tile extends Entity {
      * Initialize object.
      *
      * @param coordinate coordinate
-     * @param gc         GraphicContext
      */
-    public Tile(Coordinate coordinate, GraphicsContext gc) {
-        super(coordinate, false, gc);
+    public Tile(Coordinate coordinate) {
+        super(coordinate, false);
         spritesList = new ArrayList<>();
     }
 

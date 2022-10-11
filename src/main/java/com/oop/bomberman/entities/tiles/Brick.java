@@ -2,7 +2,6 @@ package com.oop.bomberman.entities.tiles;
 
 import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.graphics.Sprite;
-import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +11,9 @@ public class Brick extends AnimatedTile {
      * Initialize object.
      *
      * @param coordinate coordinate
-     * @param gc         GraphicContext
      */
-    public Brick(Coordinate coordinate, GraphicsContext gc) {
-        super(coordinate, false, gc);
+    public Brick(Coordinate coordinate) {
+        super(coordinate, false);
 
         List<Sprite> normal = new ArrayList<>();
         normal.add(Sprite.brick);

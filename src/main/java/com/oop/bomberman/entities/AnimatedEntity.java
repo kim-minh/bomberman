@@ -2,7 +2,6 @@ package com.oop.bomberman.entities;
 
 import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.graphics.Sprite;
-import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +26,9 @@ public abstract class AnimatedEntity extends Entity {
      *
      * @param coordinate coordinate
      * @param spawned    spawned
-     * @param gc         GraphicContext
      */
-    public AnimatedEntity(Coordinate coordinate, boolean spawned, GraphicsContext gc) {
-        super(coordinate, spawned, gc);
+    public AnimatedEntity(Coordinate coordinate, boolean spawned) {
+        super(coordinate, spawned);
         spritesList = new ArrayList<>();
     }
 
@@ -120,11 +118,11 @@ public abstract class AnimatedEntity extends Entity {
         }
         Coordinate other = e.getCoordinate();
         int spriteSize = Sprite.SCALED_SIZE;
-        canMove = x < other.getX() + spriteSize &&
+        canMove = !(x < other.getX() + spriteSize &&
                 x + spriteSize > other.getX() &&
                 y < other.getY() + spriteSize &&
-                y + spriteSize > other.getY();
-        return canMove;
+                y + spriteSize > other.getY());
+        return !canMove;
     }
 
     @Override

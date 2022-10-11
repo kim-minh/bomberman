@@ -2,7 +2,6 @@ package com.oop.bomberman.entities.tiles;
 
 import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
-import javafx.scene.canvas.GraphicsContext;
 
 public abstract class AnimatedTile extends AnimatedEntity {
     /**
@@ -10,10 +9,9 @@ public abstract class AnimatedTile extends AnimatedEntity {
      *
      * @param coordinate coordinate
      * @param spawned    spawned
-     * @param gc         GraphicContext
      */
-    public AnimatedTile(Coordinate coordinate, boolean spawned, GraphicsContext gc) {
-        super(coordinate, spawned, gc);
+    public AnimatedTile(Coordinate coordinate, boolean spawned) {
+        super(coordinate, spawned);
         direction = 0;
     }
 }

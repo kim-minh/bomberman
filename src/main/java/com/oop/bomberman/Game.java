@@ -3,34 +3,37 @@ package com.oop.bomberman;
 import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.Balloom;
+import com.oop.bomberman.entities.enemies.Oneal;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.Wall;
 import javafx.animation.AnimationTimer;
-import javafx.scene.canvas.GraphicsContext;
 
 public class Game {
-    private final GraphicsContext gc;
+    private static final Player player = new Player(Coordinate.tileToCoordinate(1, 1));
 
-    public Game(GraphicsContext gc) {
-        this.gc = gc;
+    public Game() {
+        for(int i = 0; i < 800; i += 32) {
+            Entity.entityList.add(new Wall(new Coordinate(i, 0)));
+            Entity.entityList.add(new Wall(new Coordinate(i, 544)));
+        }
+        for(int i = 0; i < 544; i += 32) {
+            Entity.entityList.add(new Wall(new Coordinate(0, i)));
+            Entity.entityList.add(new Wall(new Coordinate(768, i)));
+        }
+
+        new Balloom(Coordinate.tileToCoordinate(10, 1));
+        new Balloom(Coordinate.tileToCoordinate(6, 1));
+        new Brick(Coordinate.tileToCoordinate(2, 1));
+        new Brick(Coordinate.tileToCoordinate(14, 10));
+        new Oneal(Coordinate.tileToCoordinate(15,10));
+    }
+
+    public static Player getPlayer() {
+        return player;
     }
 
     public void update() {
-        for(int i = 0; i < 800; i += 32) {
-            Entity.entityList.add(new Wall(new Coordinate(i, 0), gc));
-            Entity.entityList.add(new Wall(new Coordinate(i, 544), gc));
-        }
-        for(int i = 0; i < 544; i += 32) {
-            Entity.entityList.add(new Wall(new Coordinate(0, i), gc));
-            Entity.entityList.add(new Wall(new Coordinate(768, i), gc));
-        }
-
-        new Player(new Coordinate(32, 32), gc);
-        new Balloom(new Coordinate(300, 32), gc);
-        new Balloom(new Coordinate(200, 32), gc);
-        new Brick(new Coordinate(64, 32), gc);
-
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {

@@ -6,7 +6,6 @@ import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.tiles.Wall;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
-import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +19,9 @@ public class ExplodeDirection extends AnimatedEntity {
      * Initialize object.
      *
      * @param coordinate coordinate
-     * @param gc         GraphicContext
      */
-    public ExplodeDirection(Coordinate coordinate, int direction, GraphicsContext gc) {
-        super(coordinate, true, gc);
+    public ExplodeDirection(Coordinate coordinate, int direction) {
+        super(coordinate, true);
         this.direction = direction;
         ExplodeDirection explodeDirection = this;
 

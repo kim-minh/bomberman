@@ -1,29 +1,24 @@
 package com.oop.bomberman.entities.enemies.AI;
 
+import com.oop.bomberman.graphics.Sprite;
+
+import java.util.Random;
+
 public class LowAI extends AI {
-    private final int maxSteps;
     private int steps;
+    private final Random random;
 
     public LowAI(int maxSteps) {
-        this.maxSteps = maxSteps;
+        this.maxSteps = maxSteps * Sprite.SCALED_SIZE;
+        random = new Random();
     }
 
     @Override
-    public void calculate() {
+    public int calculate() {
         if(steps++ >= maxSteps) {
-            isMoving = false;
             steps = 0;
+            return -1;
         }
-        if (!isMoving) {
-            goUp = goDown = goLeft = goRight = false;
-            int direction = random.nextInt(4);
-            switch (direction) {
-                case 0 -> goUp = true;
-                case 1 -> goDown = true;
-                case 2 -> goLeft = true;
-                case 3 -> goRight = true;
-            }
-            isMoving = true;
-        }
+        return random.nextInt(4);
     }
 }

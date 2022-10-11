@@ -8,10 +8,12 @@ public class BombermanController {
     @FXML
     private Canvas canvas;
 
+    public static GraphicsContext gc;
+
     @FXML
     public void initialize() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        Game game = new Game(gc);
+        gc = canvas.getGraphicsContext2D();
+        Game game = new Game();
         game.update();
     }
 }
