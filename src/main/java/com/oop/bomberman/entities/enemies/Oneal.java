@@ -1,7 +1,6 @@
 package com.oop.bomberman.entities.enemies;
 
 import com.oop.bomberman.Game;
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.enemies.AI.MediumAI;
 import com.oop.bomberman.graphics.Sprite;
 
@@ -13,10 +12,11 @@ public class Oneal extends Enemy {
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
-    public Oneal(Coordinate coordinate) {
-        super(coordinate, false);
+    public Oneal(double x, double y) {
+        super(x, y, false);
         speed = 1.5;
 
         ai = new MediumAI(Game.getPlayer(), this, 1);

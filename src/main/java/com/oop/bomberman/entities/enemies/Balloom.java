@@ -1,6 +1,5 @@
 package com.oop.bomberman.entities.enemies;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.enemies.AI.LowAI;
 import com.oop.bomberman.graphics.Sprite;
 
@@ -11,10 +10,11 @@ public class Balloom extends Enemy {
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
-    public Balloom(Coordinate coordinate) {
-        super(coordinate, false);
+    public Balloom(double x, double y) {
+        super(x, y, false);
         ai = new LowAI(5);
         speed = 0.5;
 

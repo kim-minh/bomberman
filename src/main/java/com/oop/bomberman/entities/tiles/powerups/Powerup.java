@@ -1,6 +1,5 @@
 package com.oop.bomberman.entities.tiles.powerups;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.Tile;
@@ -12,11 +11,12 @@ public abstract class Powerup extends Tile {
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
-    public Powerup(Coordinate coordinate) {
-        super(coordinate);
-        new Brick(coordinate);
+    public Powerup(double x, double y) {
+        super(x, y);
+        new Brick(x, y);
     }
 
     public abstract void activatePower(Player player);

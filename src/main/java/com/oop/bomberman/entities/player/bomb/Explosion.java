@@ -1,27 +1,27 @@
 package com.oop.bomberman.entities.player.bomb;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.graphics.Sprite;
 
 public class Explosion {
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
-    public Explosion(Coordinate coordinate, boolean increaseRadius) {
+    public Explosion(double x, double y, boolean increaseRadius) {
         int tileSize = Sprite.SCALED_SIZE;
 
-        new ExplodeDirection(coordinate, 0);
-        new ExplodeDirection(new Coordinate(coordinate.getX() - tileSize, coordinate.getY()), 1);
-        new ExplodeDirection(new Coordinate(coordinate.getX() + tileSize, coordinate.getY()), 1);
-        new ExplodeDirection(new Coordinate(coordinate.getX(), coordinate.getY() - tileSize), 2);
-        new ExplodeDirection(new Coordinate(coordinate.getX(), coordinate.getY() + tileSize), 2);
+        new ExplodeDirection(x, y, 0);
+        new ExplodeDirection(x - tileSize, y, 1);
+        new ExplodeDirection(x + tileSize, y, 1);
+        new ExplodeDirection(x, y - tileSize, 2);
+        new ExplodeDirection(x, y + tileSize, 2);
         if (increaseRadius) {
-            new ExplodeDirection(new Coordinate(coordinate.getX() - 2 * tileSize, coordinate.getY()), 3);
-            new ExplodeDirection(new Coordinate(coordinate.getX() + 2 * tileSize, coordinate.getY()), 4);
-            new ExplodeDirection(new Coordinate(coordinate.getX(), coordinate.getY() - 2 * tileSize), 5);
-            new ExplodeDirection(new Coordinate(coordinate.getX(), coordinate.getY() + 2 * tileSize), 6);
+            new ExplodeDirection(x - 2 * tileSize, y, 3);
+            new ExplodeDirection(x + 2 * tileSize, y, 4);
+            new ExplodeDirection(x, y - 2 * tileSize, 5);
+            new ExplodeDirection(x, y + 2 * tileSize, 6);
         }
     }
 }

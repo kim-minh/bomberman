@@ -1,6 +1,5 @@
 package com.oop.bomberman;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.Balloom;
 import com.oop.bomberman.entities.enemies.Oneal;
@@ -11,23 +10,23 @@ import com.oop.bomberman.entities.tiles.powerups.FireUp;
 import javafx.animation.AnimationTimer;
 
 public class Game {
-    private static final Player player = new Player(Coordinate.tileToCoordinate(1, 1));
+    private static final Player player = new Player(1, 1);
 
     public Game() {
-        for(int i = 0; i < 800; i += 32) {
-            Entity.entityList.add(new Wall(new Coordinate(i, 0)));
-            Entity.entityList.add(new Wall(new Coordinate(i, 544)));
+        for(int i = 0; i < 25; i++) {
+            Entity.entityList.add(new Wall(i, 0));
+            Entity.entityList.add(new Wall(i, 17));
         }
-        for(int i = 0; i < 544; i += 32) {
-            Entity.entityList.add(new Wall(new Coordinate(0, i)));
-            Entity.entityList.add(new Wall(new Coordinate(768, i)));
+        for(int i = 0; i < 17; i++) {
+            Entity.entityList.add(new Wall(0, i));
+            Entity.entityList.add(new Wall(24, i));
         }
 
-        new Balloom(Coordinate.tileToCoordinate(10, 1));
-        new Balloom(Coordinate.tileToCoordinate(6, 1));
-        new FireUp(Coordinate.tileToCoordinate(2, 1));
-        new Brick(Coordinate.tileToCoordinate(14, 10));
-        new Oneal(Coordinate.tileToCoordinate(15,10));
+        new Balloom(10, 1);
+        new Balloom(6, 1);
+        new FireUp(2, 1);
+        new Brick(14, 10);
+        new Oneal(15,10);
     }
 
     public static Player getPlayer() {

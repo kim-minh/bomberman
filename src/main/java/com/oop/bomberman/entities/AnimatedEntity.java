@@ -1,6 +1,5 @@
 package com.oop.bomberman.entities;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
@@ -24,11 +23,12 @@ public abstract class AnimatedEntity extends Entity {
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
-     * @param spawned    spawned
+     * @param x       coordinate x
+     * @param y       coordinate y
+     * @param spawned spawned
      */
-    public AnimatedEntity(Coordinate coordinate, boolean spawned) {
-        super(coordinate, spawned);
+    public AnimatedEntity(double x, double y, boolean spawned) {
+        super(x, y, spawned);
         spritesList = new ArrayList<>();
     }
 
@@ -93,14 +93,15 @@ public abstract class AnimatedEntity extends Entity {
     private void moveBy(double dx, double dy) {
         if (dx == 0 && dy == 0) return;
 
-        double x = coordinate.getX() + dx;
-        double y = coordinate.getY() + dy;
+        double x = this.x + dx;
+        double y = this.y + dy;
 
         if(!moveCheck(x, y)) {
             return;
         }
 
-        coordinate.relocate(x, y);
+        this.x = x;
+        this.y = y;
     }
 
     private boolean moveCheck(double x, double y) {
@@ -116,17 +117,17 @@ public abstract class AnimatedEntity extends Entity {
         if (this == e) {
             return false;
         }
-        Coordinate other = e.getCoordinate();
+
         int spriteSize = Sprite.SCALED_SIZE;
-        canMove = !(x < other.getX() + spriteSize &&
-                x + spriteSize > other.getX() &&
-                y < other.getY() + spriteSize &&
-                y + spriteSize > other.getY());
+        canMove = !(x < e.getX() + spriteSize &&
+                x + spriteSize > e.getX() &&
+                y < e.getY() + spriteSize &&
+                y + spriteSize > e.getY());
         return !canMove;
     }
 
     @Override
     public void render() {
-        gc.drawImage(spritesList.get(direction).get(spriteIndex).getTexture(), coordinate.getX(), coordinate.getY());
+        gc.drawImage(spritesList.get(direction).get(spriteIndex).getTexture(), x, y);
     }
 }

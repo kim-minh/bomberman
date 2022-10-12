@@ -1,6 +1,5 @@
 package com.oop.bomberman.entities.enemies;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.enemies.AI.AI;
 
@@ -10,11 +9,12 @@ public abstract class Enemy extends AnimatedEntity {
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      * @param spawned    spawned
      */
-    public Enemy(Coordinate coordinate, boolean spawned) {
-        super(coordinate, spawned);
+    public Enemy(double x, double y, boolean spawned) {
+        super(x, y, spawned);
     }
 
     public void update() {

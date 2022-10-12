@@ -1,6 +1,5 @@
 package com.oop.bomberman.entities.player.bomb;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
@@ -16,10 +15,11 @@ public class Bomb extends AnimatedEntity {
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
-    public Bomb(Coordinate coordinate, boolean increaseRadius) {
-        super(coordinate, true);
+    public Bomb(double x, double y, boolean increaseRadius) {
+        super(x, y, true);
         final Bomb bomb = this;
         direction = 0;
         ++bombCount;
@@ -29,7 +29,7 @@ public class Bomb extends AnimatedEntity {
             public void run() {
                 Platform.runLater(() -> {
                     clear();
-                    new Explosion(bomb.coordinate, increaseRadius);
+                    new Explosion(bomb.getX(), bomb.getY(), increaseRadius);
                     toRemove.add(bomb);
                     --bombCount;
                 });

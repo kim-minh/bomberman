@@ -1,6 +1,5 @@
 package com.oop.bomberman.entities.tiles;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.graphics.Sprite;
 
@@ -13,10 +12,11 @@ public abstract class Tile extends Entity {
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
-    public Tile(Coordinate coordinate) {
-        super(coordinate, false);
+    public Tile(double x, double y) {
+        super(x, y, false);
         spritesList = new ArrayList<>();
     }
 
@@ -27,6 +27,6 @@ public abstract class Tile extends Entity {
 
     @Override
     public void render() {
-        gc.drawImage(spritesList.get(0).getTexture(), coordinate.getX(), coordinate.getY());
+        gc.drawImage(spritesList.get(0).getTexture(), x, y);
     }
 }

@@ -38,20 +38,20 @@ public class MediumAI extends AI {
     }
 
     private int calculateCol() {
-        if(player.getCoordinate().getXTile() < enemy.getCoordinate().getXTile()) {
+        if(player.getXTile() < enemy.getXTile()) {
             return 2;
         }
-        if(player.getCoordinate().getXTile() > enemy.getCoordinate().getXTile()) {
+        if(player.getXTile() > enemy.getXTile()) {
             return 3;
         }
         return -1;
     }
 
     private int calculateRow() {
-        if(player.getCoordinate().getYTile() < enemy.getCoordinate().getYTile()) {
+        if(player.getYTile() < enemy.getYTile()) {
             return 0;
         }
-        if(player.getCoordinate().getYTile() > enemy.getCoordinate().getYTile()) {
+        if(player.getYTile() > enemy.getYTile()) {
             return 1;
         }
         return -1;

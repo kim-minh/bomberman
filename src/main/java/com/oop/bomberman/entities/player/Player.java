@@ -1,7 +1,6 @@
 package com.oop.bomberman.entities.player;
 
 import com.oop.bomberman.control.Control;
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.player.bomb.Bomb;
@@ -25,11 +24,12 @@ public class Player extends AnimatedEntity {
     /**
      * Initialize object.
      *
-     * @param coordinate Coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
 
-    public Player(Coordinate coordinate) {
-        super(coordinate, false);
+    public Player(double x, double y) {
+        super(x, y, false);
         speed = 1;
         maxBombs = 1;
 
@@ -131,7 +131,7 @@ public class Player extends AnimatedEntity {
         goLeft = Control.left;
         goRight = Control.right;
         if (Control.bomb && Bomb.bombCount < maxBombs) {
-            new Bomb(coordinate, increaseRadius);
+            new Bomb(x, y, increaseRadius);
             Control.bomb = false;
         }
         super.update();

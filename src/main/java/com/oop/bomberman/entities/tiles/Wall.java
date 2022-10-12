@@ -1,16 +1,16 @@
 package com.oop.bomberman.entities.tiles;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.graphics.Sprite;
 
 public class Wall extends Tile{
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
-    public Wall(Coordinate coordinate) {
-        super(coordinate);
+    public Wall(double x, double y) {
+        super(x, y);
         spritesList.add(Sprite.wall);
         update();
     }

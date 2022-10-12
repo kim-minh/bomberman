@@ -1,6 +1,5 @@
 package com.oop.bomberman.entities.tiles.powerups;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
@@ -12,10 +11,11 @@ public class Flamepass extends Powerup{
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate y
+     * @param y coordinate y
      */
-    public Flamepass(Coordinate coordinate) {
-        super(coordinate);
+    public Flamepass(double x, double y) {
+        super(x, y);
         spritesList.add(Sprite.powerup_flamepass);
     }
 

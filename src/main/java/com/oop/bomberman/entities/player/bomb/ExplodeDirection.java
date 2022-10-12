@@ -1,6 +1,5 @@
 package com.oop.bomberman.entities.player.bomb;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.player.Player;
@@ -20,10 +19,11 @@ public class ExplodeDirection extends AnimatedEntity {
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
-    public ExplodeDirection(Coordinate coordinate, int direction) {
-        super(coordinate, true);
+    public ExplodeDirection(double x, double y, int direction) {
+        super(x, y, true);
         this.direction = direction;
         ExplodeDirection explodeDirection = this;
 
@@ -87,7 +87,7 @@ public class ExplodeDirection extends AnimatedEntity {
         if (e instanceof Player && ((Player) e).canPassFlame()) {
             return false;
         }
-        return collide(e, this.getCoordinate().getX(), this.getCoordinate().getY());
+        return collide(e, this.getX(), this.getY());
     }
 
     @Override

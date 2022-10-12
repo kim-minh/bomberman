@@ -1,6 +1,5 @@
 package com.oop.bomberman.entities.tiles.powerups;
 
-import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.graphics.Sprite;
 
@@ -8,10 +7,11 @@ public class BombUp extends Powerup{
     /**
      * Initialize object.
      *
-     * @param coordinate coordinate
+     * @param x coordinate x
+     * @param y coordinate y
      */
-    public BombUp(Coordinate coordinate) {
-        super(coordinate);
+    public BombUp(double x, double y) {
+        super(x, y);
         spritesList.add(Sprite.powerup_bombs);
         update();
     }
