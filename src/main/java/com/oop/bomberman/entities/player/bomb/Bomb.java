@@ -10,7 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Bomb extends AnimatedEntity {
-    public static int bombCount;
+    private static int bombCount;
+    private boolean passedBomb;
 
     /**
      * Initialize object.
@@ -36,7 +37,7 @@ public class Bomb extends AnimatedEntity {
             }
         };
         Timer explodeTimer = new Timer();
-        explodeTimer.schedule(explodeTask, 2000L);
+        explodeTimer.schedule(explodeTask, 2500L);
 
         //Animation
         List<Sprite> animation = new ArrayList<>();
@@ -45,6 +46,18 @@ public class Bomb extends AnimatedEntity {
         animation.add(Sprite.bomb_2);
 
         spritesList.add(animation);
+    }
+
+    public static int getBombCount() {
+        return bombCount;
+    }
+
+    public boolean passedBomb() {
+        return passedBomb;
+    }
+
+    public void setPassedBomb(boolean passedBomb) {
+        this.passedBomb = passedBomb;
     }
 
     @Override

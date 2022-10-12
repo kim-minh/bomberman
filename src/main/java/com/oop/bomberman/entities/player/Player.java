@@ -103,9 +103,6 @@ public class Player extends AnimatedEntity {
 
     @Override
     public boolean collide(Entity e, double x, double y) {
-        if (e instanceof Bomb) {
-            return false;
-        }
         if (wallpass && e instanceof Brick) {
             return false;
         }
@@ -115,6 +112,15 @@ public class Player extends AnimatedEntity {
         }
 
         boolean collide = super.collide(e, x, y);
+
+        if (e instanceof Bomb && !((Bomb) e).passedBomb()) {
+            if (this.getX() <= e.getX() - 32 || this.getX() >= e.getX() + 32 ||
+                    this.getY() <= e.getY() - 32 || this.getY() >= e.getY() + 32) {
+                ((Bomb) e).setPassedBomb(true);
+                return true;
+            }
+            return false;
+        }
 
         if (collide && e instanceof Powerup && ((Powerup) e).canActivate()) {
             ((Powerup) e).activatePower(this);
@@ -130,7 +136,7 @@ public class Player extends AnimatedEntity {
         goDown = Control.down;
         goLeft = Control.left;
         goRight = Control.right;
-        if (Control.bomb && Bomb.bombCount < maxBombs) {
+        if (Control.bomb && Bomb.getBombCount() < maxBombs) {
             new Bomb(x, y, increaseRadius);
             Control.bomb = false;
         }
