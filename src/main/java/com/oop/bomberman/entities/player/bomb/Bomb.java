@@ -18,7 +18,7 @@ public class Bomb extends AnimatedEntity {
      *
      * @param coordinate coordinate
      */
-    public Bomb(Coordinate coordinate) {
+    public Bomb(Coordinate coordinate, boolean increaseRadius) {
         super(coordinate, true);
         final Bomb bomb = this;
         direction = 0;
@@ -29,7 +29,7 @@ public class Bomb extends AnimatedEntity {
             public void run() {
                 Platform.runLater(() -> {
                     clear();
-                    new Explosion(bomb.coordinate);
+                    new Explosion(bomb.coordinate, increaseRadius);
                     toRemove.add(bomb);
                     --bombCount;
                 });

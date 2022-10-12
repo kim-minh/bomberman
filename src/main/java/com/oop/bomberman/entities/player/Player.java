@@ -5,13 +5,22 @@ import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.player.bomb.Bomb;
+import com.oop.bomberman.entities.player.bomb.ExplodeDirection;
+import com.oop.bomberman.entities.tiles.Brick;
+import com.oop.bomberman.entities.tiles.powerups.Powerup;
 import com.oop.bomberman.graphics.Sprite;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player extends AnimatedEntity {
     private int maxBombs;
+    private boolean increaseRadius;
+    private boolean wallpass;
+    private boolean flamepass;
 
     /**
      * Initialize object.
@@ -21,7 +30,7 @@ public class Player extends AnimatedEntity {
 
     public Player(Coordinate coordinate) {
         super(coordinate, false);
-        speed = 1.2;
+        speed = 1;
         maxBombs = 1;
 
         //Initialize up animation sprites
@@ -60,8 +69,36 @@ public class Player extends AnimatedEntity {
         spritesList.add(dead);
     }
 
-    public void setMaxBombs(int maxBombs) {
-        this.maxBombs = maxBombs;
+    public void increaseMaxBombs() {
+        ++maxBombs;
+    }
+
+    public void increaseRadius(boolean increaseRadius) {
+        this.increaseRadius = increaseRadius;
+    }
+
+    public void increaseSpeed() {
+        ++speed;
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> --speed);
+            }
+        };
+        timer.schedule(task, 15000);
+    }
+
+    public void setWallpass(boolean wallpass) {
+        this.wallpass = wallpass;
+    }
+
+    public void setFlamepass(boolean flamepass) {
+        this.flamepass = flamepass;
+    }
+
+    public boolean canPassFlame() {
+        return flamepass;
     }
 
     @Override
@@ -69,7 +106,21 @@ public class Player extends AnimatedEntity {
         if (e instanceof Bomb) {
             return false;
         }
-        return super.collide(e, x, y);
+        if (wallpass && e instanceof Brick) {
+            return false;
+        }
+
+        if (flamepass && e instanceof ExplodeDirection) {
+            return false;
+        }
+
+        boolean collide = super.collide(e, x, y);
+
+        if (collide && e instanceof Powerup && ((Powerup) e).canActivate()) {
+            ((Powerup) e).activatePower(this);
+            toRemove.add(e);
+        }
+        return collide;
     }
 
     @Override
@@ -80,7 +131,7 @@ public class Player extends AnimatedEntity {
         goLeft = Control.left;
         goRight = Control.right;
         if (Control.bomb && Bomb.bombCount < maxBombs) {
-            new Bomb(coordinate);
+            new Bomb(coordinate, increaseRadius);
             Control.bomb = false;
         }
         super.update();

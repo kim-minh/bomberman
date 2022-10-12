@@ -7,6 +7,7 @@ import com.oop.bomberman.entities.enemies.Oneal;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.Wall;
+import com.oop.bomberman.entities.tiles.powerups.FireUp;
 import javafx.animation.AnimationTimer;
 
 public class Game {
@@ -24,7 +25,7 @@ public class Game {
 
         new Balloom(Coordinate.tileToCoordinate(10, 1));
         new Balloom(Coordinate.tileToCoordinate(6, 1));
-        new Brick(Coordinate.tileToCoordinate(2, 1));
+        new FireUp(Coordinate.tileToCoordinate(2, 1));
         new Brick(Coordinate.tileToCoordinate(14, 10));
         new Oneal(Coordinate.tileToCoordinate(15,10));
     }

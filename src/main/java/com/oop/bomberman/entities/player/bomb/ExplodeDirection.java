@@ -3,7 +3,9 @@ package com.oop.bomberman.entities.player.bomb;
 import com.oop.bomberman.control.Coordinate;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
+import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Wall;
+import com.oop.bomberman.entities.tiles.powerups.Powerup;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
 
@@ -43,6 +45,30 @@ public class ExplodeDirection extends AnimatedEntity {
         vertical.add(Sprite.explosion_vertical2);
         spritesList.add(vertical);
 
+        List<Sprite> leftLast = new ArrayList<>();
+        leftLast.add(Sprite.explosion_horizontal_left_last);
+        leftLast.add(Sprite.explosion_horizontal_left_last1);
+        leftLast.add(Sprite.explosion_horizontal_left_last2);
+        spritesList.add(leftLast);
+
+        List<Sprite> rightLast = new ArrayList<>();
+        rightLast.add(Sprite.explosion_horizontal_right_last);
+        rightLast.add(Sprite.explosion_horizontal_right_last1);
+        rightLast.add(Sprite.explosion_horizontal_right_last2);
+        spritesList.add(rightLast);
+
+        List<Sprite> topLast = new ArrayList<>();
+        topLast.add(Sprite.explosion_vertical_top_last);
+        topLast.add(Sprite.explosion_vertical_top_last1);
+        topLast.add(Sprite.explosion_vertical_top_last2);
+        spritesList.add(topLast);
+
+        List<Sprite> downLast = new ArrayList<>();
+        downLast.add(Sprite.explosion_vertical_down_last);
+        downLast.add(Sprite.explosion_vertical_down_last1);
+        downLast.add(Sprite.explosion_vertical_down_last2);
+        spritesList.add(downLast);
+
         TimerTask disappearTask = new TimerTask() {
             @Override
             public void run() {
@@ -58,6 +84,9 @@ public class ExplodeDirection extends AnimatedEntity {
     }
 
     public boolean collide(Entity e) {
+        if (e instanceof Player && ((Player) e).canPassFlame()) {
+            return false;
+        }
         return collide(e, this.getCoordinate().getX(), this.getCoordinate().getY());
     }
 
@@ -67,6 +96,8 @@ public class ExplodeDirection extends AnimatedEntity {
             if (collide(e)) {
                 if (e instanceof Wall) {
                     flag = true;
+                } else if (e instanceof Powerup) {
+                    ((Powerup) e).setCanActivate(true);
                 } else {
                     ((AnimatedEntity) e).isRemoved = true;
                 }
