@@ -20,8 +20,8 @@ public class Explosion {
         if (increaseRadius) {
             new ExplodeDirection(new Coordinate(coordinate.getX() - 2 * tileSize, coordinate.getY()), 3);
             new ExplodeDirection(new Coordinate(coordinate.getX() + 2 * tileSize, coordinate.getY()), 4);
-            new ExplodeDirection(new Coordinate(coordinate.getX(), coordinate.getY() + 2 * tileSize), 5);
-            new ExplodeDirection(new Coordinate(coordinate.getX(), coordinate.getY() - 2 * tileSize), 6);
+            new ExplodeDirection(new Coordinate(coordinate.getX(), coordinate.getY() - 2 * tileSize), 5);
+            new ExplodeDirection(new Coordinate(coordinate.getX(), coordinate.getY() + 2 * tileSize), 6);
         }
     }
 }
