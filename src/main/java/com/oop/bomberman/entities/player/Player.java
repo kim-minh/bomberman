@@ -20,6 +20,7 @@ public class Player extends AnimatedEntity {
     private boolean increaseRadius;
     private boolean wallpass;
     private boolean flamepass;
+    private boolean bombpass;
 
     /**
      * Initialize object.
@@ -97,6 +98,10 @@ public class Player extends AnimatedEntity {
         this.flamepass = flamepass;
     }
 
+    public void setBombpass(boolean bombpass) {
+        this.bombpass = bombpass;
+    }
+
     public boolean canPassFlame() {
         return flamepass;
     }
@@ -108,6 +113,10 @@ public class Player extends AnimatedEntity {
         }
 
         if (flamepass && e instanceof ExplodeDirection) {
+            return false;
+        }
+
+        if (bombpass && e instanceof Bomb) {
             return false;
         }
 

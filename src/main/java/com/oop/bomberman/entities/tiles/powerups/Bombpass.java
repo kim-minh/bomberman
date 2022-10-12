@@ -7,26 +7,26 @@ import javafx.application.Platform;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Flamepass extends Powerup {
+public class Bombpass extends Powerup {
     /**
      * Initialize object.
      *
-     * @param x coordinate y
+     * @param x coordinate x
      * @param y coordinate y
      */
-    public Flamepass(double x, double y) {
+    public Bombpass(double x, double y) {
         super(x, y);
-        spritesList.add(Sprite.powerup_flamepass);
+        spritesList.add(Sprite.powerup_bombpass);
     }
 
     @Override
     public void activatePower(Player player) {
-        player.setFlamepass(true);
+        player.setBombpass(true);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> player.setFlamepass(false));
+                Platform.runLater(() -> player.setBombpass(false));
             }
         };
         timer.schedule(task, 15000);
