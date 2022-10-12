@@ -15,7 +15,7 @@ public class Dahl extends Enemy {
      */
     public Dahl(double x, double y) {
         super(x, y, false);
-        speed = 1.7;
+        speed = 1.8;
         ai = new LowAI(6);
 
         List<Sprite> left = new ArrayList<>();

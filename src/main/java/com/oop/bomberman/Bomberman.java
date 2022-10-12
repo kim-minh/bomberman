@@ -12,9 +12,8 @@ import java.io.IOException;
 public class Bomberman extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Bomberman.class.getResource("FXML/app-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Bomberman.class.getResource("FXML/menu-view.fxml"));
         AnchorPane root = fxmlLoader.load();
-        root.setStyle("-fx-background-color: #50a000");
 
         Scene scene = new Scene(root, 800, 600);
         Control control = new Control();

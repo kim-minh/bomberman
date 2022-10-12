@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oop.bomberman.MenuController">
+   <children>
+      <MenuBar layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Text fill="#62ee4f" layoutX="196.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="5.0" text="BOMBERMAN" textAlignment="CENTER" wrappingWidth="409.21630859375">
+         <font>
+            <Font size="64.0" />
+         </font>
+         <stroke>
+            <LinearGradient>
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.38733553886413574" green="0.5921052694320679" blue="0.3645833432674408" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006711409395973154">
+                     <color>
+                        <Color red="0.38733553886413574" green="0.5921052694320679" blue="0.3645833432674408" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.32906919717788696" green="0.41501787304878235" blue="0.9736841917037964" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Text>
+      <Button layoutX="245.0" layoutY="357.0" mnemonicParsing="false" onAction="#start" prefHeight="45.0" prefWidth="312.0" text="Start" />
+      <Button layoutX="245.0" layoutY="442.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="312.0" text="Help" />
+   </children>
+</AnchorPane>

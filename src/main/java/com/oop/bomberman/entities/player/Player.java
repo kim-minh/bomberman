@@ -31,7 +31,7 @@ public class Player extends AnimatedEntity {
 
     public Player(double x, double y) {
         super(x, y, false);
-        speed = 1.1;
+        speed = 1.2;
         maxBombs = 1;
 
         //Initialize up animation sprites
@@ -123,8 +123,8 @@ public class Player extends AnimatedEntity {
         boolean collide = super.collide(e, x, y);
 
         if (e instanceof Bomb && !((Bomb) e).passedBomb()) {
-            if (this.getX() <= e.getX() - 32 || this.getX() >= e.getX() + 32 ||
-                    this.getY() <= e.getY() - 32 || this.getY() >= e.getY() + 32) {
+            if (this.getX() <= e.getX() - Sprite.SCALED_SIZE || this.getX() >= e.getX() + Sprite.SCALED_SIZE ||
+                    this.getY() <= e.getY() - Sprite.SCALED_SIZE || this.getY() >= e.getY() + Sprite.SCALED_SIZE) {
                 ((Bomb) e).setPassedBomb(true);
                 return true;
             }

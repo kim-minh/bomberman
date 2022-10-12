@@ -16,7 +16,7 @@ public class Pontan extends Enemy {
      */
     public Pontan(double x, double y) {
         super(x, y, false);
-        speed = 3;
+        speed = 2.5;
         ai = new MediumAI(Game.getPlayer(), this, 2);
         wallpass = true;
 
