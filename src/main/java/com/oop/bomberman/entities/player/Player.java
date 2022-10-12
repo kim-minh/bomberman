@@ -31,7 +31,7 @@ public class Player extends AnimatedEntity {
 
     public Player(double x, double y) {
         super(x, y, false);
-        speed = 1;
+        speed = 1.1;
         maxBombs = 1;
 
         //Initialize up animation sprites

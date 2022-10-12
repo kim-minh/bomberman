@@ -18,7 +18,7 @@ public abstract class AnimatedEntity extends Entity {
     protected int direction = 3;
     protected boolean canMove;
     public boolean isRemoved;
-    protected int frame = 0;
+    private int frame = 0;
 
     /**
      * Initialize object.

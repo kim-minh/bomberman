@@ -1,10 +1,15 @@
 package com.oop.bomberman.entities.enemies;
 
 import com.oop.bomberman.entities.AnimatedEntity;
+import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.AI.AI;
+import com.oop.bomberman.entities.player.Player;
+import com.oop.bomberman.entities.tiles.Brick;
+import com.oop.bomberman.entities.tiles.powerups.Powerup;
 
 public abstract class Enemy extends AnimatedEntity {
     protected AI ai;
+    protected boolean wallpass;
 
     /**
      * Initialize object.
@@ -15,6 +20,19 @@ public abstract class Enemy extends AnimatedEntity {
      */
     public Enemy(double x, double y, boolean spawned) {
         super(x, y, spawned);
+    }
+
+    @Override
+    protected boolean collide(Entity e, double x, double y) {
+        boolean collide = super.collide(e, x, y);
+        if (collide && e instanceof Player) {
+            ((Player) e).isRemoved = true; // TODO: remove comment
+        }
+        if (this.wallpass && (e instanceof Brick || e instanceof Powerup || e instanceof Enemy)) {
+            return false;
+        }
+
+        return collide;
     }
 
     public void update() {

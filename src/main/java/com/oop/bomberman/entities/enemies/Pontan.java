@@ -1,37 +1,39 @@
 package com.oop.bomberman.entities.enemies;
 
-import com.oop.bomberman.entities.enemies.AI.LowAI;
+import com.oop.bomberman.Game;
+import com.oop.bomberman.entities.enemies.AI.MediumAI;
 import com.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Balloom extends Enemy {
+public class Pontan extends Enemy {
     /**
      * Initialize object.
      *
-     * @param x coordinate x
-     * @param y coordinate y
+     * @param x       coordinate x
+     * @param y       coordinate y
      */
-    public Balloom(double x, double y) {
+    public Pontan(double x, double y) {
         super(x, y, false);
-        ai = new LowAI(5);
-        speed = 1;
+        speed = 3;
+        ai = new MediumAI(Game.getPlayer(), this, 2);
+        wallpass = true;
 
         //Initialize left animation sprites
         List<Sprite> left = new ArrayList<>();
-        left.add(Sprite.balloom_left1);
-        left.add(Sprite.balloom_left2);
-        left.add(Sprite.balloom_left3);
+        left.add(Sprite.pontan_left1);
+        left.add(Sprite.pontan_left2);
+        left.add(Sprite.pontan_left3);
 
         //Initialize right animation sprites
         List<Sprite> right = new ArrayList<>();
-        right.add(Sprite.balloom_right1);
-        right.add(Sprite.balloom_right2);
-        right.add(Sprite.balloom_right3);
+        right.add(Sprite.pontan_right1);
+        right.add(Sprite.pontan_right2);
+        right.add(Sprite.pontan_right3);
 
         List<Sprite> dead = new ArrayList<>();
-        dead.add(Sprite.balloom_dead);
+        dead.add(Sprite.pontan_dead);
         dead.add(Sprite.mob_dead1);
         dead.add(Sprite.mob_dead2);
         dead.add(Sprite.mob_dead3);
