@@ -61,6 +61,6 @@
             </Menu>
          </menus>
       </MenuBar>
-      <Canvas fx:id="canvas" height="372.0" layoutY="28.0" width="600.0" />
+      <Canvas fx:id="canvas" height="572.0" layoutY="28.0" width="800.0" />
    </children>
 </AnchorPane>
