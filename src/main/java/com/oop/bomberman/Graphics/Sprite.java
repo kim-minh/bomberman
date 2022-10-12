@@ -80,15 +80,15 @@ public class Sprite {
     public static Sprite oneal_dead = new Sprite(11, 3);
 
     //Doll
-    public static Sprite doll_left1 = new Sprite(13, 0);
-    public static Sprite doll_left2 = new Sprite(13, 1);
-    public static Sprite doll_left3 = new Sprite(13, 2);
+    public static Sprite dahl_left1 = new Sprite(13, 0);
+    public static Sprite dahl_left2 = new Sprite(13, 1);
+    public static Sprite dahl_left3 = new Sprite(13, 2);
 
-    public static Sprite doll_right1 = new Sprite(14, 0);
-    public static Sprite doll_right2 = new Sprite(14, 1);
-    public static Sprite doll_right3 = new Sprite(14, 2);
+    public static Sprite dahl_right1 = new Sprite(14, 0);
+    public static Sprite dahl_right2 = new Sprite(14, 1);
+    public static Sprite dahl_right3 = new Sprite(14, 2);
 
-    public static Sprite doll_dead = new Sprite(13, 3);
+    public static Sprite dall_dead = new Sprite(13, 3);
 
     //Minvo
     public static Sprite minvo_left1 = new Sprite(8, 5);
@@ -101,6 +101,17 @@ public class Sprite {
 
     public static Sprite minvo_dead = new Sprite(8, 8);
 
+    //Ovape
+    public static Sprite ovape_left1 = new Sprite(6, 5);
+    public static Sprite ovape_left2 = new Sprite(6, 6);
+    public static Sprite ovape_left3 = new Sprite(6, 7);
+
+    public static Sprite ovape_right1 = new Sprite(7, 5);
+    public static Sprite ovape_right2 = new Sprite(7, 6);
+    public static Sprite ovape_right3 = new Sprite(7, 7);
+
+    public static Sprite ovape_dead = new Sprite(6, 8);
+
     //Kondoria
     public static Sprite kondoria_left1 = new Sprite(10, 5);
     public static Sprite kondoria_left2 = new Sprite(10, 6);
@@ -111,6 +122,17 @@ public class Sprite {
     public static Sprite kondoria_right3 = new Sprite(11, 7);
 
     public static Sprite kondoria_dead = new Sprite(10, 8);
+
+    //Pontan
+    public static Sprite pontan_left1 = new Sprite(12, 5);
+    public static Sprite pontan_left2 = new Sprite(12, 6);
+    public static Sprite pontan_left3 = new Sprite(12, 7);
+
+    public static Sprite pontan_right1 = new Sprite(13, 5);
+    public static Sprite pontan_right2 = new Sprite(13, 6);
+    public static Sprite pontan_right3 = new Sprite(13, 7);
+
+    public static Sprite pontan_dead = new Sprite(12, 8);
 
     //ALL
     public static Sprite mob_dead1 = new Sprite(15, 0);
