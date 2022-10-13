@@ -9,7 +9,7 @@ import static com.oop.bomberman.graphics.SpriteSheet.spriteSheet;
 
 public class Sprite {
     public static final int DEFAULT_SIZE = 16;
-    public static int SCALED_FACTOR = 2; //times the default size
+    public static int SCALED_FACTOR = 3; //times the default size
     public static int SCALED_SIZE = DEFAULT_SIZE * SCALED_FACTOR;
     private static final int TRANSPARENT = 0xffff00ff;
     private final int[] pixels;

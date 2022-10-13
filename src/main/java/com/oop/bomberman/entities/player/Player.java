@@ -9,6 +9,8 @@ import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.powerups.Powerup;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Player extends AnimatedEntity {
+    private final DoubleProperty xProperty;
+    private final DoubleProperty yProperty;
     private int maxBombs;
     private boolean increaseRadius;
     private boolean wallpass;
@@ -31,7 +35,9 @@ public class Player extends AnimatedEntity {
 
     public Player(double x, double y) {
         super(x, y, false);
-        speed = 1.2;
+        this.xProperty = new SimpleDoubleProperty();
+        this.yProperty = new SimpleDoubleProperty();
+        speed = 1.5;
         maxBombs = 1;
 
         //Initialize up animation sprites
@@ -70,6 +76,24 @@ public class Player extends AnimatedEntity {
         spritesList.add(dead);
     }
 
+    public final DoubleProperty xProperty() {
+        return xProperty;
+    }
+
+    public final DoubleProperty yProperty() {
+        return yProperty;
+    }
+
+    @Override
+    public double getX() {
+        return xProperty.get();
+    }
+
+    @Override
+    public double getY() {
+        return yProperty.get();
+    }
+
     public void increaseMaxBombs() {
         ++maxBombs;
     }
@@ -104,6 +128,13 @@ public class Player extends AnimatedEntity {
 
     public boolean canPassFlame() {
         return flamepass;
+    }
+
+    @Override
+    protected void moveBy(double dx, double dy) {
+        super.moveBy(dx, dy);
+        xProperty.set(x);
+        yProperty.set(y);
     }
 
     @Override

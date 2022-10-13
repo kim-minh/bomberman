@@ -10,12 +10,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Bomberman extends Application {
+    private static Scene scene;
+
+    public static Scene getScene() {
+        return scene;
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Bomberman.class.getResource("FXML/menu-view.fxml"));
         AnchorPane root = fxmlLoader.load();
 
-        Scene scene = new Scene(root, 800, 600);
+        scene = new Scene(root, 800, 600);
         Control control = new Control();
         control.handle(scene);
 

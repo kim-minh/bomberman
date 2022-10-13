@@ -17,7 +17,7 @@ public class Oneal extends Enemy {
      */
     public Oneal(double x, double y) {
         super(x, y, false);
-        speed = 1.5;
+        speed = 2;
 
         ai = new MediumAI(Game.getPlayer(), this, 1);
 

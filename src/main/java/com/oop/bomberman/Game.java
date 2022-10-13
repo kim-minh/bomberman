@@ -11,7 +11,11 @@ import javafx.animation.AnimationTimer;
 public class Game {
     private static final Player player = new Player(1, 1);
 
-    public Game() {
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public void update() {
         for(int i = 0; i < 25; i++) {
             Entity.entityList.add(new Wall(i, 0));
             Entity.entityList.add(new Wall(i, 17));
@@ -28,13 +32,7 @@ public class Game {
         new Ovape(15,10);
         new Kondoria(17, 15);
         new Pontan(10, 10);
-    }
-
-    public static Player getPlayer() {
-        return player;
-    }
-
-    public void update() {
+        
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {

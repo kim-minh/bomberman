@@ -90,7 +90,7 @@ public abstract class AnimatedEntity extends Entity {
         render();
     }
 
-    private void moveBy(double dx, double dy) {
+    protected void moveBy(double dx, double dy) {
         if (dx == 0 && dy == 0) return;
 
         double x = this.x + dx;
