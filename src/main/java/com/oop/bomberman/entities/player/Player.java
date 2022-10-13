@@ -177,7 +177,9 @@ public class Player extends AnimatedEntity {
         goLeft = Control.left;
         goRight = Control.right;
         if (Control.bomb && Bomb.getBombCount() < maxBombs) {
-            new Bomb(x, y, increaseRadius);
+            double bombX = Math.round(x / Sprite.SCALED_SIZE) * Sprite.SCALED_SIZE;
+            double bombY = Math.round(y / Sprite.SCALED_SIZE) * Sprite.SCALED_SIZE;
+            new Bomb(bombX, bombY, increaseRadius);
             Control.bomb = false;
         }
         super.update();
