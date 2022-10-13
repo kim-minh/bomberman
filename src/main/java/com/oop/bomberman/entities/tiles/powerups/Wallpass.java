@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Wallpass extends Powerup {
+public class Wallpass extends PowerUp {
     /**
      * Initialize object.
      *

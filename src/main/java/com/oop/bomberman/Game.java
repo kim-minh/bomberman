@@ -2,19 +2,12 @@ package com.oop.bomberman;
 
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.*;
-import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.Wall;
 import com.oop.bomberman.entities.tiles.powerups.FireUp;
 import javafx.animation.AnimationTimer;
 
 public class Game {
-    private static final Player player = new Player(1, 1);
-
-    public static Player getPlayer() {
-        return player;
-    }
-
     public void update() {
         for(int i = 0; i < 25; i++) {
             Entity.entityList.add(new Wall(i, 0));

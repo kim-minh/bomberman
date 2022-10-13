@@ -8,15 +8,19 @@ import java.io.InputStream;
 public class SpriteSheet {
     private final String path;
     private final int size;
-    public final int[] pixels;
+    private final int[] pixels;
 
-    public static SpriteSheet spriteSheet = new SpriteSheet("textures/classic.png", 256);
+    public static final SpriteSheet spriteSheet = new SpriteSheet("textures/classic.png", 256);
 
     public SpriteSheet(String path, int size) {
         this.path = path;
         this.size = size;
         pixels = new int[size * size];
         load();
+    }
+
+    public int[] getPixels() {
+        return pixels;
     }
 
     private void load() {

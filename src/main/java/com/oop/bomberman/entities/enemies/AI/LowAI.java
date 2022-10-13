@@ -6,7 +6,7 @@ public class LowAI extends AI {
     private int steps;
 
     public LowAI(int maxSteps) {
-        this.maxSteps = maxSteps * Sprite.SCALED_SIZE;
+        this.maxSteps = maxSteps * Sprite.getScaledSize();
     }
 
     @Override

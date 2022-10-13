@@ -1,7 +1,7 @@
 package com.oop.bomberman.entities.enemies;
 
-import com.oop.bomberman.Game;
 import com.oop.bomberman.entities.enemies.AI.MediumAI;
+import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class Kondoria extends Enemy {
         super(x, y, false);
         wallpass = true;
         speed = 0.5;
-        ai = new MediumAI(Game.getPlayer(), this, 1);
+        ai = new MediumAI(Player.getPlayer(), this, 1);
 
         //Initialize left animation sprites
         List<Sprite> left = new ArrayList<>();

@@ -3,7 +3,7 @@ package com.oop.bomberman.entities.tiles.powerups;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.graphics.Sprite;
 
-public class FireUp extends Powerup {
+public class FireUp extends PowerUp {
     /**
      * Initialize object.
      *

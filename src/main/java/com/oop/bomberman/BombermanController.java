@@ -1,5 +1,6 @@
 package com.oop.bomberman;
 
+import com.oop.bomberman.entities.player.Player;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -14,7 +15,11 @@ public class BombermanController {
     @FXML
     private AnchorPane anchorPane;
 
-    public static GraphicsContext gc;
+    private static GraphicsContext gc;
+
+    public static GraphicsContext getGraphicContext() {
+        return gc;
+    }
 
     private double clampRange(double value, double max) {
         if (value < 0) {
@@ -29,8 +34,8 @@ public class BombermanController {
         clip.widthProperty().bind(scene.widthProperty());
         clip.heightProperty().bind(scene.heightProperty());
         clip.xProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(Game.getPlayer().getX() - scene.getWidth() / 2,
-                        anchorPane.getWidth() - scene.getWidth()), Game.getPlayer().xProperty(),
+                () -> clampRange(Player.getPlayer().getX() - scene.getWidth() / 2,
+                        anchorPane.getWidth() - scene.getWidth()), Player.getPlayer().xProperty(),
                 anchorPane.widthProperty()));
         anchorPane.setClip(clip);
         anchorPane.translateXProperty().bind(clip.xProperty().multiply(-1));

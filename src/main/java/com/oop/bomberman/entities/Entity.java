@@ -11,11 +11,11 @@ import java.util.List;
 public abstract class Entity {
     protected double x;
     protected double y;
-    public static List<Entity> entityList = new ArrayList<>();
-    public static List<Entity> toRemove = new ArrayList<>();
-    public static List<Entity> toAdd = new ArrayList<>();
+    public static final List<Entity> entityList = new ArrayList<>();
+    public static final List<Entity> toRemove = new ArrayList<>();
+    public static final List<Entity> toAdd = new ArrayList<>();
     protected int spriteIndex = 0 ;
-    protected GraphicsContext gc;
+    protected final GraphicsContext gc;
 
     /**
      * Initialize object.
@@ -25,11 +25,11 @@ public abstract class Entity {
      * @param spawned    spawned
      */
     public Entity(double x, double y, boolean spawned) {
-        this.gc = BombermanController.gc;
+        this.gc = BombermanController.getGraphicContext();
         if (!spawned) {
             entityList.add(this);
-            this.x = x * Sprite.SCALED_SIZE;
-            this.y = y * Sprite.SCALED_SIZE;
+            this.x = x * Sprite.getScaledSize();
+            this.y = y * Sprite.getScaledSize();
         } else {
             this.x = x;
             this.y = y;
@@ -50,7 +50,7 @@ public abstract class Entity {
      * @return x tile
      */
     public int getXTile() {
-        return (int) (x / Sprite.SCALED_SIZE);
+        return (int) (x / Sprite.getScaledSize());
     }
 
     /**
@@ -58,7 +58,7 @@ public abstract class Entity {
      * @return y tile
      */
     public int getYTile() {
-        return (int) (y / Sprite.SCALED_SIZE);
+        return (int) (y / Sprite.getScaledSize());
     }
 
     public abstract void render();
@@ -81,7 +81,7 @@ public abstract class Entity {
     }
 
     public void clear() {
-        gc.clearRect(x, y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
+        gc.clearRect(x, y, Sprite.getScaledSize(), Sprite.getScaledSize());
     }
 }
 

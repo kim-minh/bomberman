@@ -6,7 +6,7 @@ import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.player.bomb.Bomb;
 import com.oop.bomberman.entities.player.bomb.ExplodeDirection;
 import com.oop.bomberman.entities.tiles.Brick;
-import com.oop.bomberman.entities.tiles.powerups.Powerup;
+import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
@@ -25,6 +25,8 @@ public class Player extends AnimatedEntity {
     private boolean wallpass;
     private boolean flamepass;
     private boolean bombpass;
+
+    private static final Player player = new Player(1, 1);
 
     /**
      * Initialize object.
@@ -74,6 +76,10 @@ public class Player extends AnimatedEntity {
         spritesList.add(left);
         spritesList.add(right);
         spritesList.add(dead);
+    }
+
+    public static Player getPlayer() {
+        return player;
     }
 
     public final DoubleProperty xProperty() {
@@ -154,16 +160,18 @@ public class Player extends AnimatedEntity {
         boolean collide = super.collide(e, x, y);
 
         if (e instanceof Bomb && !((Bomb) e).passedBomb()) {
-            if (this.getX() <= e.getX() - Sprite.SCALED_SIZE || this.getX() >= e.getX() + Sprite.SCALED_SIZE ||
-                    this.getY() <= e.getY() - Sprite.SCALED_SIZE || this.getY() >= e.getY() + Sprite.SCALED_SIZE) {
+            if (this.getX() <= e.getX() - Sprite.getScaledSize()
+                    || this.getX() >= e.getX() + Sprite.getScaledSize()
+                    || this.getY() <= e.getY() - Sprite.getScaledSize()
+                    || this.getY() >= e.getY() + Sprite.getScaledSize()) {
                 ((Bomb) e).setPassedBomb(true);
                 return true;
             }
             return false;
         }
 
-        if (collide && e instanceof Powerup && ((Powerup) e).canActivate()) {
-            ((Powerup) e).activatePower(this);
+        if (collide && e instanceof PowerUp && ((PowerUp) e).canActivate()) {
+            ((PowerUp) e).activatePower(this);
             toRemove.add(e);
         }
         return collide;
@@ -177,8 +185,8 @@ public class Player extends AnimatedEntity {
         goLeft = Control.left;
         goRight = Control.right;
         if (Control.bomb && Bomb.getBombCount() < maxBombs) {
-            double bombX = Math.round(x / Sprite.SCALED_SIZE) * Sprite.SCALED_SIZE;
-            double bombY = Math.round(y / Sprite.SCALED_SIZE) * Sprite.SCALED_SIZE;
+            double bombX = Math.round(x / Sprite.getScaledSize()) * Sprite.getScaledSize();
+            double bombY = Math.round(y / Sprite.getScaledSize()) * Sprite.getScaledSize();
             new Bomb(bombX, bombY, increaseRadius);
             Control.bomb = false;
         }

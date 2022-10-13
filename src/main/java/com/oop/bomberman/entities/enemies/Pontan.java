@@ -1,7 +1,7 @@
 package com.oop.bomberman.entities.enemies;
 
-import com.oop.bomberman.Game;
 import com.oop.bomberman.entities.enemies.AI.MediumAI;
+import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class Pontan extends Enemy {
     public Pontan(double x, double y) {
         super(x, y, false);
         speed = 3;
-        ai = new MediumAI(Game.getPlayer(), this, 2);
+        ai = new MediumAI(Player.getPlayer(), this, 2);
         wallpass = true;
 
         //Initialize left animation sprites

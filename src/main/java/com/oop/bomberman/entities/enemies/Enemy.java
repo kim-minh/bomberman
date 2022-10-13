@@ -5,7 +5,7 @@ import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.AI.AI;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Brick;
-import com.oop.bomberman.entities.tiles.powerups.Powerup;
+import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 
 public abstract class Enemy extends AnimatedEntity {
     protected AI ai;
@@ -28,7 +28,7 @@ public abstract class Enemy extends AnimatedEntity {
         if (collide && e instanceof Player) {
             ((Player) e).isRemoved = true; // TODO: remove comment
         }
-        if (this.wallpass && (e instanceof Brick || e instanceof Powerup || e instanceof Enemy)) {
+        if (this.wallpass && (e instanceof Brick || e instanceof PowerUp || e instanceof Enemy)) {
             return false;
         }
 

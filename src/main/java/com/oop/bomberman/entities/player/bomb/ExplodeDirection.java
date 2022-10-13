@@ -4,7 +4,7 @@ import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Wall;
-import com.oop.bomberman.entities.tiles.powerups.Powerup;
+import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
 
@@ -96,8 +96,8 @@ public class ExplodeDirection extends AnimatedEntity {
             if (collide(e)) {
                 if (e instanceof Wall) {
                     flag = true;
-                } else if (e instanceof Powerup) {
-                    ((Powerup) e).setCanActivate(true);
+                } else if (e instanceof PowerUp) {
+                    ((PowerUp) e).setCanActivate(true);
                 } else {
                     ((AnimatedEntity) e).isRemoved = true;
                 }

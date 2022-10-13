@@ -8,7 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class AnimatedEntity extends Entity {
-    protected List<List<Sprite>> spritesList;
+    protected final List<List<Sprite>> spritesList;
     protected boolean goUp;
     protected boolean goDown;
     protected boolean goLeft;
@@ -118,7 +118,7 @@ public abstract class AnimatedEntity extends Entity {
             return false;
         }
 
-        int spriteSize = Sprite.SCALED_SIZE;
+        int spriteSize = Sprite.getScaledSize();
         canMove = !(x < e.getX() + spriteSize &&
                 x + spriteSize > e.getX() &&
                 y < e.getY() + spriteSize &&

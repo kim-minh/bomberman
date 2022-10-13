@@ -12,7 +12,7 @@ public class MediumAI extends AI {
     public MediumAI(Player player, Enemy enemy, int maxSteps) {
         this.player = player;
         this.enemy = enemy;
-        this.maxSteps = maxSteps * Sprite.SCALED_SIZE;
+        this.maxSteps = maxSteps * Sprite.getScaledSize();
     }
 
     @Override

@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Flamepass extends Powerup {
+public class Flamepass extends PowerUp {
     /**
      * Initialize object.
      *

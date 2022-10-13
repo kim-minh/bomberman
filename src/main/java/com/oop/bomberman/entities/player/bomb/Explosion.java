@@ -10,7 +10,7 @@ public class Explosion {
      * @param y coordinate y
      */
     public Explosion(double x, double y, boolean increaseRadius) {
-        int tileSize = Sprite.SCALED_SIZE;
+        int tileSize = Sprite.getScaledSize();
 
         new ExplodeDirection(x, y, 0);
         new ExplodeDirection(x - tileSize, y, 1);

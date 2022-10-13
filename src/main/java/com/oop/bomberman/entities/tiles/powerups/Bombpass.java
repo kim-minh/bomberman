@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Bombpass extends Powerup {
+public class Bombpass extends PowerUp {
     /**
      * Initialize object.
      *

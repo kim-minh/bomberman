@@ -4,7 +4,7 @@ import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.Tile;
 
-public abstract class Powerup extends Tile {
+public abstract class PowerUp extends Tile {
     protected boolean canActivate;
     protected boolean active;
 
@@ -14,7 +14,7 @@ public abstract class Powerup extends Tile {
      * @param x coordinate x
      * @param y coordinate y
      */
-    public Powerup(double x, double y) {
+    public PowerUp(double x, double y) {
         super(x, y);
         new Brick(x, y);
     }
