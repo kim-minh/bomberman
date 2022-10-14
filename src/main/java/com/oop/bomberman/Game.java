@@ -8,6 +8,16 @@ import com.oop.bomberman.entities.tiles.powerups.FireUp;
 import javafx.animation.AnimationTimer;
 
 public class Game {
+    private static int totalPoints;
+
+    public static int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public static void setTotalPoints(int totalPoints) {
+        Game.totalPoints = totalPoints;
+    }
+
     public void update() {
         for(int i = 0; i < 25; i++) {
             Entity.entityList.add(new Wall(i, 0));

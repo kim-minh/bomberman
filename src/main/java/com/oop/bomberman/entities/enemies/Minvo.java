@@ -15,7 +15,7 @@ public class Minvo extends Enemy {
      * @param y       coordinate y
      */
     public Minvo(double x, double y) {
-        super(x, y, false);
+        super(x, y, 800, false);
         speed = 2;
         ai = new MediumAI(Player.getPlayer(), this, 1);
 

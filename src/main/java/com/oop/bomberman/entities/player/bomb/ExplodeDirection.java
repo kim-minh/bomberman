@@ -2,6 +2,8 @@ package com.oop.bomberman.entities.player.bomb;
 
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
+import com.oop.bomberman.entities.Message;
+import com.oop.bomberman.entities.enemies.Enemy;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Wall;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
@@ -98,8 +100,11 @@ public class ExplodeDirection extends AnimatedEntity {
                     flag = true;
                 } else if (e instanceof PowerUp) {
                     ((PowerUp) e).setCanActivate(true);
-                } else {
+                } else if (e instanceof AnimatedEntity) {
                     ((AnimatedEntity) e).isRemoved = true;
+                    if (e instanceof Enemy) {
+                        new Message(e.getX(), e.getY(), "+" + ((Enemy) e).getPoint());
+                    }
                 }
             }
         }

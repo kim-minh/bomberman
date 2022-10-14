@@ -15,7 +15,7 @@ public class Pontan extends Enemy {
      * @param y       coordinate y
      */
     public Pontan(double x, double y) {
-        super(x, y, false);
+        super(x, y, 8000, false);
         speed = 3;
         ai = new MediumAI(Player.getPlayer(), this, 2);
         wallpass = true;

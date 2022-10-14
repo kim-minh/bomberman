@@ -14,7 +14,7 @@ public class Kondoria extends Enemy {
      * @param x       coordinate x
      */
     public Kondoria(double x, double y) {
-        super(x, y, false);
+        super(x, y, 1000,  false);
         wallpass = true;
         speed = 0.5;
         ai = new MediumAI(Player.getPlayer(), this, 1);

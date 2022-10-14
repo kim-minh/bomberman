@@ -9,6 +9,7 @@ import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 
 public abstract class Enemy extends AnimatedEntity {
     protected AI ai;
+    private final int point;
     protected boolean wallpass;
 
     /**
@@ -18,8 +19,13 @@ public abstract class Enemy extends AnimatedEntity {
      * @param y coordinate y
      * @param spawned    spawned
      */
-    public Enemy(double x, double y, boolean spawned) {
+    public Enemy(double x, double y, int point, boolean spawned) {
         super(x, y, spawned);
+        this.point = point;
+    }
+
+    public int getPoint() {
+        return point;
     }
 
     @Override

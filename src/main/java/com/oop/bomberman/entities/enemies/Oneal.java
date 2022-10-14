@@ -16,7 +16,7 @@ public class Oneal extends Enemy {
      * @param y coordinate y
      */
     public Oneal(double x, double y) {
-        super(x, y, false);
+        super(x, y, 200, false);
         speed = 2;
 
         ai = new MediumAI(Player.getPlayer(), this, 1);

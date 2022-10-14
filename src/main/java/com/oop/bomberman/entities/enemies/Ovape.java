@@ -14,7 +14,7 @@ public class Ovape extends Enemy {
      * @param y       coordinate y
      */
     public Ovape(double x, double y) {
-        super(x, y, false);
+        super(x, y, 2000, false);
         speed = 1;
         ai = new LowAI(6);
         wallpass = true;

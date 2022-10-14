@@ -14,7 +14,7 @@ public class Dahl extends Enemy {
      * @param y       coordinate y
      */
     public Dahl(double x, double y) {
-        super(x, y, false);
+        super(x, y, 400, false);
         speed = 1.8;
         ai = new LowAI(6);
 
