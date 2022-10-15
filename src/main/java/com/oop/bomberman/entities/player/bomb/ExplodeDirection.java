@@ -105,6 +105,9 @@ public class ExplodeDirection extends AnimatedEntity {
                     if (e instanceof Enemy) {
                         new Message(e.getX(), e.getY(), "+" + ((Enemy) e).getPoint());
                     }
+                    if (e instanceof Player) {
+                        new Message(e.getX(), e.getY(), "-1");
+                    }
                 }
             }
         }
