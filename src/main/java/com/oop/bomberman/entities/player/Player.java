@@ -6,6 +6,7 @@ import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.player.bomb.Bomb;
 import com.oop.bomberman.entities.player.bomb.ExplodeDirection;
 import com.oop.bomberman.entities.tiles.Brick;
+import com.oop.bomberman.entities.tiles.Tile;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
@@ -39,7 +40,7 @@ public class Player extends AnimatedEntity {
         super(x, y, false);
         this.xProperty = new SimpleDoubleProperty();
         this.yProperty = new SimpleDoubleProperty();
-        speed = 1.5;
+        speed = 3.5;
         maxBombs = 1;
 
         //Initialize up animation sprites
@@ -158,6 +159,12 @@ public class Player extends AnimatedEntity {
         }
 
         boolean collide = super.collide(e, x, y);
+
+        if (e instanceof Tile) {
+            clear();
+            this.x = Math.round(this.x / Sprite.getScaledSize()) * Sprite.getScaledSize();
+            this.y = Math.round(this.y/ Sprite.getScaledSize()) * Sprite.getScaledSize();
+        }
 
         if (e instanceof Bomb && !((Bomb) e).passedBomb()) {
             if (this.getX() <= e.getX() - Sprite.getScaledSize()
