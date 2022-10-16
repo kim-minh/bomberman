@@ -62,7 +62,6 @@ public abstract class AnimatedEntity extends Entity {
             animate();
             moveBy(dx, dy);
         } else {
-            clear();
             spriteIndex = 0;
         }
         render();
