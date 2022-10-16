@@ -21,7 +21,7 @@ public class Bomberman extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Bomberman.class.getResource("FXML/menu-view.fxml"));
         AnchorPane root = fxmlLoader.load();
 
-        scene = new Scene(root, 800, 600);
+        scene = new Scene(root, 800, 650);
         Control control = new Control();
         control.handle(scene);
 

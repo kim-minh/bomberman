@@ -1,6 +1,7 @@
 package com.oop.bomberman;
 
 import com.oop.bomberman.entities.player.Player;
+import com.oop.bomberman.graphics.Sprite;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -46,10 +47,12 @@ public class BombermanController {
         gc = canvas.getGraphicsContext2D();
         Game game = new Game();
 
-        canvas.setWidth(1000);
-        anchorPane.setMinSize(1000, 600);
-        anchorPane.setPrefSize(1000, 600);
-        anchorPane.setMaxSize(1000, 600);
+        canvas.setWidth(31 * Sprite.getScaledSize());
+        canvas.setHeight(17 * Sprite.getScaledSize());
+
+        anchorPane.setMinSize(31 * Sprite.getScaledSize(), 17 * Sprite.getScaledSize());
+        anchorPane.setPrefSize(31 * Sprite.getScaledSize(), 17 * Sprite.getScaledSize());
+        anchorPane.setMaxSize(31 * Sprite.getScaledSize(), 17 * Sprite.getScaledSize());
         addCamera();
 
         game.update();
