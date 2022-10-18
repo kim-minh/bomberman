@@ -16,7 +16,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
@@ -111,7 +111,7 @@ public class Player extends AnimatedEntity {
     }
 
     private void addCamera() {
-        AnchorPane anchorPane = BombermanController.getAnchorPane();
+        Pane pane = BombermanController.getPane();
         Scene scene = Bomberman.getScene();
         Rectangle clip = new Rectangle();
         Player player = this;
@@ -120,10 +120,11 @@ public class Player extends AnimatedEntity {
         clip.heightProperty().bind(scene.heightProperty());
         clip.xProperty().bind(Bindings.createDoubleBinding(
                 () -> clampRange(x - scene.getWidth() / 2,
-                        anchorPane.getWidth() - scene.getWidth()), player.xProperty(),
-                anchorPane.widthProperty()));
-        anchorPane.setClip(clip);
-        anchorPane.translateXProperty().bind(clip.xProperty().multiply(-1));
+                        pane.getWidth() - scene.getWidth()), player.xProperty(),
+                pane.widthProperty()));
+
+        pane.setClip(clip);
+        pane.translateXProperty().bind(clip.xProperty().multiply(-1));
     }
 
     public void increaseMaxBombs() {
