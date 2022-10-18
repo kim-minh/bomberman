@@ -14,10 +14,10 @@ public class Pontan extends Enemy {
      * @param x       coordinate x
      * @param y       coordinate y
      */
-    public Pontan(double x, double y) {
+    public Pontan(double x, double y, Player player) {
         super(x, y, 8000, false);
         speed = 3;
-        ai = new MediumAI(Player.getPlayer(), this, 2);
+        ai = new MediumAI(player, this, 2);
         wallpass = true;
 
         //Initialize left animation sprites

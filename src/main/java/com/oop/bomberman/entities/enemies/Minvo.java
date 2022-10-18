@@ -14,10 +14,10 @@ public class Minvo extends Enemy {
      * @param x       coordinate x
      * @param y       coordinate y
      */
-    public Minvo(double x, double y) {
+    public Minvo(double x, double y, Player player) {
         super(x, y, 800, false);
         speed = 2;
-        ai = new MediumAI(Player.getPlayer(), this, 1);
+        ai = new MediumAI(player, this, 1);
 
         //Initialize left animation sprites
         List<Sprite> left = new ArrayList<>();

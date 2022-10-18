@@ -2,6 +2,7 @@ package com.oop.bomberman.level;
 
 import com.oop.bomberman.Bomberman;
 import com.oop.bomberman.entities.enemies.*;
+import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.Portal;
 import com.oop.bomberman.entities.tiles.Wall;
@@ -13,16 +14,11 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class FileLevel {
-    protected int level, height, width;
-    protected String[] lineTiles;
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
+    private Player player;
+    private int level;
+    private static int height;
+    private static int width;
+    private String[] lineTiles;
 
     public int getLevel() {
         return level;
@@ -53,9 +49,9 @@ public class FileLevel {
         }
     }
 
-        public void createEntities() {
-        for (int i = 0; i < getHeight(); i++) {
-            for (int j = 0; j < getWidth(); j++) {
+    public void createEntities() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 addLevelEntity(lineTiles[i].charAt(j), j, i);
             }
         }
@@ -66,11 +62,12 @@ public class FileLevel {
             case '#' -> new Wall(x, y);
             case '*' -> new Brick(x, y);
             case 'x' -> new Portal(x, y);
+            case 'p' -> player = new Player(x, y);
             case '1' -> new Balloom(x, y);
-            case '2' -> new Oneal(x, y);
+            case '2' -> new Oneal(x, y, player);
             case '3' -> new Dahl(x, y);
-            case '4' -> new Minvo(x, y);
-            case '5' -> new Kondoria(x, y);
+            case '4' -> new Minvo(x, y, player);
+            case '5' -> new Kondoria(x, y, player);
         }
     }
 

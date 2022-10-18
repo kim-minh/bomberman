@@ -5,7 +5,9 @@ import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.AI.AI;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Brick;
+import com.oop.bomberman.entities.tiles.Tile;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
+import com.oop.bomberman.graphics.Sprite;
 
 public abstract class Enemy extends AnimatedEntity {
     protected AI ai;
@@ -30,6 +32,12 @@ public abstract class Enemy extends AnimatedEntity {
 
     @Override
     protected boolean collide(Entity e, double x, double y) {
+        if (e instanceof Tile) {
+            clear();
+            this.x = Math.round(this.x / Sprite.getScaledSize()) * Sprite.getScaledSize();
+            this.y = Math.round(this.y/ Sprite.getScaledSize()) * Sprite.getScaledSize();
+        }
+
         boolean collide = super.collide(e, x, y);
         if (collide && e instanceof Player) {
             ((Player) e).isRemoved = true; // TODO: remove comment

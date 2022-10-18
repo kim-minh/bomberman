@@ -15,11 +15,11 @@ public class Oneal extends Enemy {
      * @param x coordinate x
      * @param y coordinate y
      */
-    public Oneal(double x, double y) {
+    public Oneal(double x, double y, Player player) {
         super(x, y, 200, false);
         speed = 2;
 
-        ai = new MediumAI(Player.getPlayer(), this, 1);
+        ai = new MediumAI(player, this, 1);
 
         List<Sprite> left = new ArrayList<>();
         left.add(Sprite.oneal_left1);

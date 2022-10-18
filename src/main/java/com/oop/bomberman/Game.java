@@ -2,12 +2,15 @@ package com.oop.bomberman;
 
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.Enemy;
+import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Wall;
-import com.oop.bomberman.level.FileLevel;
+import com.oop.bomberman.level.Level;
 import javafx.animation.AnimationTimer;
 
 public class Game {
+    private Level level;
     private boolean passedLevel;
+    private boolean playerDead = false;
     private static int totalPoints;
 
     public static int getTotalPoints() {
@@ -18,20 +21,13 @@ public class Game {
         Game.totalPoints = totalPoints;
     }
 
-    private void createLevel(int level) {
-        FileLevel fileLevel = new FileLevel();
-        fileLevel.loadLevel(level);
-        fileLevel.createEntities();
-    }
-
-    public void update() {
-        createLevel(1);
-        
+    public void start() {
         AnimationTimer animation = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 Entity.updateList();
                 passedLevel = true;
+                playerDead = true;
                 for(Entity e : Entity.entityList) {
                     if (!(e instanceof Wall)) {
                         e.update();
@@ -39,12 +35,20 @@ public class Game {
                     if (e instanceof Enemy) {
                         passedLevel = false;
                     }
+                    if (e instanceof Player) {
+                        playerDead = false;
+                    }
                 }
                 if (passedLevel) {
-                    this.stop();
+                    level.nextLevel();
+                }
+                if(playerDead) {
+                    level.restartLevel();
                 }
             }
         };
-        animation.start();
+
+        level = new Level(animation);
+        level.newGame();
     }
 }

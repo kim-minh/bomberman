@@ -1,5 +1,7 @@
 package com.oop.bomberman.entities.player;
 
+import com.oop.bomberman.Bomberman;
+import com.oop.bomberman.BombermanController;
 import com.oop.bomberman.control.Control;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
@@ -10,8 +12,12 @@ import com.oop.bomberman.entities.tiles.Tile;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +33,6 @@ public class Player extends AnimatedEntity {
     private boolean flamepass;
     private boolean bombpass;
 
-    private static final Player player = new Player(1, 1);
-
     /**
      * Initialize object.
      *
@@ -40,7 +44,7 @@ public class Player extends AnimatedEntity {
         super(x, y, false);
         this.xProperty = new SimpleDoubleProperty();
         this.yProperty = new SimpleDoubleProperty();
-        speed = 3.5;
+        speed = 2;
         maxBombs = 1;
 
         //Initialize up animation sprites
@@ -77,10 +81,8 @@ public class Player extends AnimatedEntity {
         spritesList.add(left);
         spritesList.add(right);
         spritesList.add(dead);
-    }
 
-    public static Player getPlayer() {
-        return player;
+        addCamera();
     }
 
     public final DoubleProperty xProperty() {
@@ -99,6 +101,29 @@ public class Player extends AnimatedEntity {
     @Override
     public double getY() {
         return yProperty.get();
+    }
+
+    private double clampRange(double value, double max) {
+        if (value < 0) {
+            return 0;
+        }
+        return Math.min(value, max);
+    }
+
+    private void addCamera() {
+        AnchorPane anchorPane = BombermanController.getAnchorPane();
+        Scene scene = Bomberman.getScene();
+        Rectangle clip = new Rectangle();
+        Player player = this;
+
+        clip.widthProperty().bind(scene.widthProperty());
+        clip.heightProperty().bind(scene.heightProperty());
+        clip.xProperty().bind(Bindings.createDoubleBinding(
+                () -> clampRange(x - scene.getWidth() / 2,
+                        anchorPane.getWidth() - scene.getWidth()), player.xProperty(),
+                anchorPane.widthProperty()));
+        anchorPane.setClip(clip);
+        anchorPane.translateXProperty().bind(clip.xProperty().multiply(-1));
     }
 
     public void increaseMaxBombs() {
@@ -198,5 +223,10 @@ public class Player extends AnimatedEntity {
             Control.bomb = false;
         }
         super.update();
+        if (isRemoved) {
+            x = Sprite.getScaledSize();
+            y = Sprite.getScaledSize();
+            xProperty.set(x);
+        }
     }
 }

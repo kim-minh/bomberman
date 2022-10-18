@@ -13,11 +13,11 @@ public class Kondoria extends Enemy {
      *
      * @param x       coordinate x
      */
-    public Kondoria(double x, double y) {
+    public Kondoria(double x, double y, Player player) {
         super(x, y, 1000,  false);
         wallpass = true;
         speed = 0.5;
-        ai = new MediumAI(Player.getPlayer(), this, 1);
+        ai = new MediumAI(player, this, 1);
 
         //Initialize left animation sprites
         List<Sprite> left = new ArrayList<>();
