@@ -6,6 +6,9 @@ import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.Portal;
 import com.oop.bomberman.entities.tiles.Wall;
+import com.oop.bomberman.entities.tiles.powerups.BombUp;
+import com.oop.bomberman.entities.tiles.powerups.FireUp;
+import com.oop.bomberman.entities.tiles.powerups.Skate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,6 +71,9 @@ public class FileLevel {
             case '3' -> new Dahl(x, y);
             case '4' -> new Minvo(x, y, player);
             case '5' -> new Kondoria(x, y, player);
+            case 'b' -> new BombUp(x, y);
+            case 'f' -> new FireUp(x, y);
+            case 's' -> new Skate(x, y);
         }
     }
 

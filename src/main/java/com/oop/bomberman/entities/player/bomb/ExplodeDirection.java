@@ -1,10 +1,12 @@
 package com.oop.bomberman.entities.player.bomb;
 
+import com.oop.bomberman.Game;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.Message;
 import com.oop.bomberman.entities.enemies.Enemy;
 import com.oop.bomberman.entities.player.Player;
+import com.oop.bomberman.entities.tiles.Portal;
 import com.oop.bomberman.entities.tiles.Wall;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
@@ -100,14 +102,20 @@ public class ExplodeDirection extends AnimatedEntity {
                     flag = true;
                 } else if (e instanceof PowerUp) {
                     ((PowerUp) e).setCanActivate(true);
+                } else if (e instanceof Portal) {
+                    ((Portal) e).setCanActivate(true);
                 } else if (e instanceof AnimatedEntity) {
-                    ((AnimatedEntity) e).isRemoved = true;
+                    boolean isRemoved = ((AnimatedEntity) e).isRemoved;
                     if (e instanceof Enemy) {
                         new Message(e.getX(), e.getY(), "+" + ((Enemy) e).getPoint());
+                        if (!isRemoved) {
+                            Game.addTotalPoints(((Enemy) e).getPoint());
+                        }
                     }
                     if (e instanceof Player) {
                         new Message(e.getX(), e.getY(), "-1");
                     }
+                    ((AnimatedEntity) e).isRemoved = true;
                 }
             }
         }

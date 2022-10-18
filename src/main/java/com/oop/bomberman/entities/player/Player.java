@@ -8,6 +8,7 @@ import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.player.bomb.Bomb;
 import com.oop.bomberman.entities.player.bomb.ExplodeDirection;
 import com.oop.bomberman.entities.tiles.Brick;
+import com.oop.bomberman.entities.tiles.Portal;
 import com.oop.bomberman.entities.tiles.Tile;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
@@ -28,6 +29,7 @@ public class Player extends AnimatedEntity {
     private final DoubleProperty xProperty;
     private final DoubleProperty yProperty;
     private int maxBombs;
+    private static boolean activatePortal;
     private boolean increaseRadius;
     private boolean wallpass;
     private boolean flamepass;
@@ -81,8 +83,6 @@ public class Player extends AnimatedEntity {
         spritesList.add(left);
         spritesList.add(right);
         spritesList.add(dead);
-
-        addCamera();
     }
 
     public final DoubleProperty xProperty() {
@@ -101,6 +101,10 @@ public class Player extends AnimatedEntity {
     @Override
     public double getY() {
         return yProperty.get();
+    }
+
+    public static boolean activatedPortal() {
+        return activatePortal;
     }
 
     private double clampRange(double value, double max) {
@@ -168,6 +172,7 @@ public class Player extends AnimatedEntity {
         super.moveBy(dx, dy);
         xProperty.set(x);
         yProperty.set(y);
+        addCamera();
     }
 
     @Override
@@ -207,6 +212,8 @@ public class Player extends AnimatedEntity {
             ((PowerUp) e).activatePower(this);
             toRemove.add(e);
         }
+
+        activatePortal = collide && e instanceof Portal && ((Portal) e).canActivate();
         return collide;
     }
 

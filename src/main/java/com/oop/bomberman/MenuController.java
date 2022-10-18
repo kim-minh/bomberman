@@ -14,6 +14,6 @@ public class MenuController {
     public void start() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Bomberman.class.getResource("FXML/app-view.fxml"));
         anchorPane.getChildren().setAll((AnchorPane)fxmlLoader.load());
-        anchorPane.setStyle("-fx-background-color: #50a000");
+        anchorPane.setStyle("-fx-background-color: #000000");
     }
 }
