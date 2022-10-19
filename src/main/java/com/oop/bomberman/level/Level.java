@@ -1,6 +1,7 @@
 package com.oop.bomberman.level;
 
 import com.oop.bomberman.BombermanController;
+import com.oop.bomberman.control.Audio;
 import com.oop.bomberman.entities.Entity;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -38,6 +39,8 @@ public class Level {
     }
 
     public void nextLevel() {
+        Audio audio = new Audio("clearLevel.wav");
+        audio.playFx();
         transition();
         fileLevel.loadLevel(++currentLevel);
     }

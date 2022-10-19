@@ -21,6 +21,7 @@ public class Bombpass extends PowerUp {
 
     @Override
     public void activatePower(Player player) {
+        playSound();
         player.setBombpass(true);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {

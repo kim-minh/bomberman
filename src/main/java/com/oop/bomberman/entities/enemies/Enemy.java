@@ -40,7 +40,7 @@ public abstract class Enemy extends AnimatedEntity {
 
         boolean collide = super.collide(e, x, y);
         if (collide && e instanceof Player) {
-            ((Player) e).isRemoved = true; // TODO: remove comment
+            ((Player) e).remove();
         }
         if (this.wallpass && (e instanceof Brick || e instanceof PowerUp || e instanceof Enemy)) {
             return false;

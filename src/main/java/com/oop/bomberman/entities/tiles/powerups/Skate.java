@@ -18,6 +18,7 @@ public class Skate extends PowerUp {
 
     @Override
     public void activatePower(Player player) {
+        playSound();
         player.increaseSpeed();
     }
 }

@@ -21,6 +21,7 @@ public class Flamepass extends PowerUp {
 
     @Override
     public void activatePower(Player player) {
+        playSound();
         player.setFlamepass(true);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {

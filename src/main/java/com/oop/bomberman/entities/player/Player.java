@@ -148,6 +148,12 @@ public class Player extends AnimatedEntity {
         return flamepass;
     }
 
+    private void placeBomb() {
+        double bombX = Math.round(x / Sprite.getScaledSize()) * Sprite.getScaledSize();
+        double bombY = Math.round(y / Sprite.getScaledSize()) * Sprite.getScaledSize();
+        new Bomb(bombX, bombY, increaseRadius);
+    }
+
     @Override
     protected void moveBy(double dx, double dy) {
         super.moveBy(dx, dy);
@@ -180,7 +186,7 @@ public class Player extends AnimatedEntity {
         }
 
         if (collide && e instanceof Enemy) {
-            isRemoved = true;
+            remove();
         }
 
         if (e instanceof Bomb && !((Bomb) e).passedBomb()) {
@@ -211,9 +217,7 @@ public class Player extends AnimatedEntity {
         goLeft = Control.left;
         goRight = Control.right;
         if (Control.bomb && Bomb.getBombCount() < maxBombs) {
-            double bombX = Math.round(x / Sprite.getScaledSize()) * Sprite.getScaledSize();
-            double bombY = Math.round(y / Sprite.getScaledSize()) * Sprite.getScaledSize();
-            new Bomb(bombX, bombY, increaseRadius);
+            placeBomb();
             Control.bomb = false;
         }
         super.update();

@@ -1,8 +1,10 @@
 package com.oop.bomberman.entities.player.bomb;
 
+import com.oop.bomberman.control.Audio;
 import com.oop.bomberman.graphics.Sprite;
 
 public class Explosion {
+
     /**
      * Initialize object.
      *
@@ -23,5 +25,8 @@ public class Explosion {
             new ExplodeDirection(x, y - 2 * tileSize, 5);
             new ExplodeDirection(x, y + 2 * tileSize, 6);
         }
+
+        Audio audio = new Audio("explode.wav");
+        audio.playFx();
     }
 }

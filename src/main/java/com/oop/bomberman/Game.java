@@ -1,10 +1,11 @@
 package com.oop.bomberman;
 
+import com.oop.bomberman.control.Audio;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.enemies.Enemy;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.entities.tiles.Wall;
-import com.oop.bomberman.Graphics.Banner;
+import com.oop.bomberman.graphics.Banner;
 import com.oop.bomberman.level.Level;
 import javafx.animation.AnimationTimer;
 
@@ -24,6 +25,8 @@ public class Game {
 
     public void start() {
         Banner banner = new Banner();
+        Audio music = new Audio("music.wav");
+        music.playMusic();
 
         AnimationTimer animation = new AnimationTimer() {
             @Override
@@ -45,8 +48,11 @@ public class Game {
                 }
                 if (passedLevel && Player.activatedPortal()) {
                     level.nextLevel();
+                    banner.startTimer();
                 }
                 if(playerDead) {
+                    Audio audio = new Audio("playerDead.wav");
+                    audio.playFx();
                     level.restartLevel();
                 }
             }

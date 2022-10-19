@@ -18,6 +18,7 @@ public class FireUp extends PowerUp {
 
     @Override
     public void activatePower(Player player) {
+        playSound();
         active = true;
         player.increaseRadius(true);
     }

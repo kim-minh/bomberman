@@ -18,6 +18,7 @@ public class BombUp extends PowerUp {
 
     @Override
     public void activatePower(Player player) {
+        playSound();
         player.increaseMaxBombs();
     }
 }

@@ -1,6 +1,7 @@
 package com.oop.bomberman.entities.player.bomb;
 
 import com.oop.bomberman.Game;
+import com.oop.bomberman.control.Audio;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.Message;
@@ -105,17 +106,19 @@ public class ExplodeDirection extends AnimatedEntity {
                 } else if (e instanceof Portal) {
                     ((Portal) e).setCanActivate(true);
                 } else if (e instanceof AnimatedEntity) {
-                    boolean isRemoved = ((AnimatedEntity) e).isRemoved;
+                    boolean isRemoved = ((AnimatedEntity) e).isRemoved();
                     if (e instanceof Enemy) {
                         new Message(e.getX(), e.getY(), "+" + ((Enemy) e).getPoint());
                         if (!isRemoved) {
                             Game.addTotalPoints(((Enemy) e).getPoint());
+                            Audio audio = new Audio("mobDead.wav");
+                            audio.playFx();
                         }
                     }
                     if (e instanceof Player) {
                         new Message(e.getX(), e.getY(), "-1");
                     }
-                    ((AnimatedEntity) e).isRemoved = true;
+                    ((AnimatedEntity) e).remove();
                 }
             }
         }

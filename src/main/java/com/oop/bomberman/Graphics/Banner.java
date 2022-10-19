@@ -1,4 +1,4 @@
-package com.oop.bomberman.Graphics;
+package com.oop.bomberman.graphics;
 
 import com.oop.bomberman.BombermanController;
 import com.oop.bomberman.Game;

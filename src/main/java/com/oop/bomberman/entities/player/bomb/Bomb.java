@@ -1,5 +1,6 @@
 package com.oop.bomberman.entities.player.bomb;
 
+import com.oop.bomberman.control.Audio;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
@@ -46,6 +47,9 @@ public class Bomb extends AnimatedEntity {
         animation.add(Sprite.bomb_2);
 
         spritesList.add(animation);
+
+        Audio audio = new Audio("placeBomb.wav");
+        audio.playFx();
     }
 
     public static int getBombCount() {

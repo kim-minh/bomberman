@@ -30,7 +30,7 @@ public class BombermanController {
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         gc = canvas.getGraphicsContext2D();
         gcBanner = banner.getGraphicsContext2D();
         staticPane = pane;

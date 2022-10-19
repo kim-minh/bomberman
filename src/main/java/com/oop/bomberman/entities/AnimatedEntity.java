@@ -17,7 +17,7 @@ public abstract class AnimatedEntity extends Entity {
     protected double speed;
     protected int direction = 3;
     protected boolean canMove;
-    public boolean isRemoved;
+    private boolean removed;
     private int frame = 0;
 
     /**
@@ -32,10 +32,18 @@ public abstract class AnimatedEntity extends Entity {
         spritesList = new ArrayList<>();
     }
 
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public void remove() {
+        removed = true;
+    }
+
     public void update() {
         double dx = 0, dy = 0;
 
-        if (isRemoved) {
+        if (removed) {
             direction = 4;
             deadAnimate();
             return;

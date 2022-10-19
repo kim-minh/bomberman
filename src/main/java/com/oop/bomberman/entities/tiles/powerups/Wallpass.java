@@ -21,6 +21,7 @@ public class Wallpass extends PowerUp {
 
     @Override
     public void activatePower(Player player) {
+        playSound();
         player.setWallpass(true);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
