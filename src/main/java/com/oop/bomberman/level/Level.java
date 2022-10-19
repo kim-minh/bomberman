@@ -50,6 +50,10 @@ public class Level {
         fileLevel.loadLevel(currentLevel);
     }
 
+    public void startGimmick() {
+        fileLevel.gimmick();
+    }
+
     private void transition() {
         Entity.entityList.clear();
 

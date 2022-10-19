@@ -14,6 +14,7 @@ public class Game {
     private boolean passedLevel;
     private boolean playerDead = false;
     private static int totalPoints;
+    private boolean gimmickStarted;
 
     public static int getTotalPoints() {
         return totalPoints;
@@ -45,6 +46,12 @@ public class Game {
                     if (e instanceof Player) {
                         playerDead = false;
                     }
+                }
+                if (banner.timeUp() && !gimmickStarted) {
+                    level.startGimmick();
+                    gimmickStarted = true;
+                } else if (!banner.timeUp()) {
+                    gimmickStarted = false;
                 }
                 if (passedLevel && Player.activatedPortal()) {
                     level.nextLevel();

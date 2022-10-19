@@ -27,8 +27,8 @@ public class Banner {
         startTimer();
     }
 
-    public int getTime() {
-        return timeSeconds.get();
+    public boolean timeUp() {
+        return timeSeconds.get() == 0;
     }
 
     public void startTimer() {

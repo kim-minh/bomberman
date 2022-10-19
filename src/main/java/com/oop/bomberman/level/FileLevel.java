@@ -77,4 +77,9 @@ public class FileLevel {
         }
     }
 
+    public void gimmick() {
+        for (int i = 0; i < 5; ++i) {
+            new Pontan(1, 1, player);
+        }
+    }
 }
