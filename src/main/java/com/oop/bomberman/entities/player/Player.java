@@ -18,7 +18,6 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -26,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static com.oop.bomberman.Bomberman.getScene;
 
 public class Player extends AnimatedEntity {
     private Pane pane;
@@ -96,8 +93,8 @@ public class Player extends AnimatedEntity {
     }
 
     private double clampRange() {
-        double value = x - getScene().getWidth() / 2;
-        double max = pane.getWidth() - getScene().getWidth();
+        double value = x - Bomberman.getScene().getWidth() / 2;
+        double max = pane.getWidth() - Bomberman.getScene().getWidth();
         if (value < 0) {
             return 0;
         }
@@ -106,11 +103,10 @@ public class Player extends AnimatedEntity {
 
     private void addCamera() {
         pane = BombermanController.getPane();
-        Scene scene = Bomberman.getScene();
         clip = new Rectangle();
 
-        clip.widthProperty().bind(scene.widthProperty());
-        clip.heightProperty().bind(scene.heightProperty());
+        clip.widthProperty().bind(Bomberman.getScene().widthProperty());
+        clip.heightProperty().bind(Bomberman.getScene().heightProperty());
 
         pane.setClip(clip);
         pane.translateXProperty().bind(clip.xProperty().multiply(-1));
