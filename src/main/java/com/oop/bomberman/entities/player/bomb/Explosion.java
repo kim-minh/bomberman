@@ -15,15 +15,24 @@ public class Explosion {
         int tileSize = Sprite.getScaledSize();
 
         new ExplodeDirection(x, y, 0);
-        new ExplodeDirection(x - tileSize, y, 1);
-        new ExplodeDirection(x + tileSize, y, 1);
-        new ExplodeDirection(x, y - tileSize, 2);
-        new ExplodeDirection(x, y + tileSize, 2);
+        ExplodeDirection left = new ExplodeDirection(x - tileSize, y, 1);
+        ExplodeDirection right = new ExplodeDirection(x + tileSize, y, 1);
+        ExplodeDirection up = new ExplodeDirection(x, y - tileSize, 2);
+        ExplodeDirection down = new ExplodeDirection(x, y + tileSize, 2);
+
         if (increaseRadius) {
-            new ExplodeDirection(x - 2 * tileSize, y, 3);
-            new ExplodeDirection(x + 2 * tileSize, y, 4);
-            new ExplodeDirection(x, y - 2 * tileSize, 5);
-            new ExplodeDirection(x, y + 2 * tileSize, 6);
+            if (left.flagged2()) {
+                new ExplodeDirection(x - 2 * tileSize, y, 3);
+            }
+            if (right.flagged2()) {
+                new ExplodeDirection(x + 2 * tileSize, y, 4);
+            }
+            if (up.flagged2()) {
+                new ExplodeDirection(x, y - 2 * tileSize, 5);
+            }
+            if (down.flagged2()) {
+                new ExplodeDirection(x, y + 2 * tileSize, 6);
+            }
         }
 
         Audio audio = new Audio("explode.wav");

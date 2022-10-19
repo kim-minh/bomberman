@@ -7,6 +7,7 @@ import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.Message;
 import com.oop.bomberman.entities.enemies.Enemy;
 import com.oop.bomberman.entities.player.Player;
+import com.oop.bomberman.entities.tiles.Brick;
 import com.oop.bomberman.entities.tiles.Portal;
 import com.oop.bomberman.entities.tiles.Wall;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
@@ -20,6 +21,7 @@ import java.util.TimerTask;
 
 public class ExplodeDirection extends AnimatedEntity {
     private boolean flag;
+    private boolean flag2;
 
     /**
      * Initialize object.
@@ -82,10 +84,16 @@ public class ExplodeDirection extends AnimatedEntity {
         };
         Timer disappearTimer = new Timer();
         disappearTimer.schedule(disappearTask, 500L);
+
+        update();
     }
 
     public boolean flagged() {
         return flag;
+    }
+
+    public boolean flagged2() {
+        return !flag && !flag2;
     }
 
     public boolean collide(Entity e) {
@@ -107,6 +115,9 @@ public class ExplodeDirection extends AnimatedEntity {
                     ((Portal) e).setCanActivate(true);
                 } else if (e instanceof AnimatedEntity) {
                     boolean isRemoved = ((AnimatedEntity) e).isRemoved();
+                    if (e instanceof Brick) {
+                        flag2 = true;
+                    }
                     if (e instanceof Enemy) {
                         new Message(e.getX(), e.getY(), "+" + ((Enemy) e).getPoint());
                         if (!isRemoved) {

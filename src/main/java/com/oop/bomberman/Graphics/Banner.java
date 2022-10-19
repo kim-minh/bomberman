@@ -2,6 +2,7 @@ package com.oop.bomberman.graphics;
 
 import com.oop.bomberman.BombermanController;
 import com.oop.bomberman.Game;
+import com.oop.bomberman.entities.player.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -44,5 +45,6 @@ public class Banner {
         gc.clearRect(0, 0, 800, 34);
         gc.fillText("Score: " + Game.getTotalPoints(), 10, 15);
         gc.fillText("Timer: " + timeSeconds.get(), 100, 15);
+        gc.fillText("Life: " + Player.getLife(), 200, 15);
     }
 }
