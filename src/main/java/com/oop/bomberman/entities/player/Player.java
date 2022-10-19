@@ -5,6 +5,7 @@ import com.oop.bomberman.BombermanController;
 import com.oop.bomberman.control.Control;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
+import com.oop.bomberman.entities.enemies.Enemy;
 import com.oop.bomberman.entities.player.bomb.Bomb;
 import com.oop.bomberman.entities.player.bomb.ExplodeDirection;
 import com.oop.bomberman.entities.tiles.Brick;
@@ -12,6 +13,7 @@ import com.oop.bomberman.entities.tiles.Portal;
 import com.oop.bomberman.entities.tiles.Tile;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
+import com.oop.bomberman.level.Level;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -25,9 +27,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.oop.bomberman.Bomberman.getScene;
+
 public class Player extends AnimatedEntity {
+    private Pane pane;
+    private Rectangle clip;
     private final DoubleProperty xProperty;
-    private final DoubleProperty yProperty;
     private int maxBombs;
     private static boolean activatePortal;
     private boolean increaseRadius;
@@ -45,7 +50,6 @@ public class Player extends AnimatedEntity {
     public Player(double x, double y) {
         super(x, y, false);
         this.xProperty = new SimpleDoubleProperty();
-        this.yProperty = new SimpleDoubleProperty();
         speed = 2;
         maxBombs = 1;
 
@@ -83,31 +87,17 @@ public class Player extends AnimatedEntity {
         spritesList.add(left);
         spritesList.add(right);
         spritesList.add(dead);
-    }
 
-    public final DoubleProperty xProperty() {
-        return xProperty;
-    }
-
-    public final DoubleProperty yProperty() {
-        return yProperty;
-    }
-
-    @Override
-    public double getX() {
-        return xProperty.get();
-    }
-
-    @Override
-    public double getY() {
-        return yProperty.get();
+        addCamera();
     }
 
     public static boolean activatedPortal() {
         return activatePortal;
     }
 
-    private double clampRange(double value, double max) {
+    private double clampRange() {
+        double value = x - getScene().getWidth() / 2;
+        double max = pane.getWidth() - getScene().getWidth();
         if (value < 0) {
             return 0;
         }
@@ -115,17 +105,12 @@ public class Player extends AnimatedEntity {
     }
 
     private void addCamera() {
-        Pane pane = BombermanController.getPane();
+        pane = BombermanController.getPane();
         Scene scene = Bomberman.getScene();
-        Rectangle clip = new Rectangle();
-        Player player = this;
+        clip = new Rectangle();
 
         clip.widthProperty().bind(scene.widthProperty());
         clip.heightProperty().bind(scene.heightProperty());
-        clip.xProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(x - scene.getWidth() / 2,
-                        pane.getWidth() - scene.getWidth()), player.xProperty(),
-                pane.widthProperty()));
 
         pane.setClip(clip);
         pane.translateXProperty().bind(clip.xProperty().multiply(-1));
@@ -171,8 +156,9 @@ public class Player extends AnimatedEntity {
     protected void moveBy(double dx, double dy) {
         super.moveBy(dx, dy);
         xProperty.set(x);
-        yProperty.set(y);
-        addCamera();
+
+        Level.xProperty().bind(Bindings.createDoubleBinding(this::clampRange, xProperty));
+        clip.xProperty().bind(Bindings.createDoubleBinding(this::clampRange, xProperty, pane.widthProperty()));
     }
 
     @Override
@@ -195,6 +181,10 @@ public class Player extends AnimatedEntity {
             clear();
             this.x = Math.round(this.x / Sprite.getScaledSize()) * Sprite.getScaledSize();
             this.y = Math.round(this.y/ Sprite.getScaledSize()) * Sprite.getScaledSize();
+        }
+
+        if (collide && e instanceof Enemy) {
+            isRemoved = true;
         }
 
         if (e instanceof Bomb && !((Bomb) e).passedBomb()) {
@@ -231,10 +221,5 @@ public class Player extends AnimatedEntity {
             Control.bomb = false;
         }
         super.update();
-        if (isRemoved) {
-            x = Sprite.getScaledSize();
-            y = Sprite.getScaledSize();
-            xProperty.set(x);
-        }
     }
 }
