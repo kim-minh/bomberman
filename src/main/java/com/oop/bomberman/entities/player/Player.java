@@ -31,6 +31,7 @@ public class Player extends AnimatedEntity {
     private Rectangle clip;
     private final DoubleProperty xProperty;
     private int maxBombs;
+    private static int life = 3;
     private static boolean activatePortal;
     private boolean increaseRadius;
     private boolean wallpass;
@@ -86,6 +87,18 @@ public class Player extends AnimatedEntity {
         spritesList.add(dead);
 
         addCamera();
+    }
+
+    public static void resetLife() {
+        life = 3;
+    }
+
+    public static void decreaseLife() {
+        --life;
+    }
+
+    public static int getLife() {
+        return life;
     }
 
     public static boolean activatedPortal() {

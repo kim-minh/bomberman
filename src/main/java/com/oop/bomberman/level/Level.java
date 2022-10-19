@@ -1,8 +1,10 @@
 package com.oop.bomberman.level;
 
 import com.oop.bomberman.BombermanController;
+import com.oop.bomberman.Game;
 import com.oop.bomberman.control.Audio;
 import com.oop.bomberman.entities.Entity;
+import com.oop.bomberman.entities.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
@@ -35,6 +37,8 @@ public class Level {
 
     public void newGame() {
         transition();
+        Game.resetTotalPoints();
+        Player.resetLife();
         fileLevel.loadLevel(1);
     }
 

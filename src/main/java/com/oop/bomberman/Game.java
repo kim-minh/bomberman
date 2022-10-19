@@ -21,7 +21,11 @@ public class Game {
     }
 
     public static void addTotalPoints(int points) {
-        Game.totalPoints += points;
+        totalPoints += points;
+    }
+
+    public static void resetTotalPoints() {
+        totalPoints = 0;
     }
 
     public void start() {
@@ -60,7 +64,13 @@ public class Game {
                 if(playerDead) {
                     Audio audio = new Audio("playerDead.wav");
                     audio.playFx();
-                    level.restartLevel();
+                    Player.decreaseLife();
+                    if (Player.getLife() == 0) {
+                        level.newGame();
+                        banner.startTimer();
+                    } else {
+                        level.restartLevel();
+                    }
                 }
             }
         };
