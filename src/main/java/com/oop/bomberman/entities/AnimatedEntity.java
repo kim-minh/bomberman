@@ -8,7 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class AnimatedEntity extends Entity {
-    protected List<List<Sprite>> spritesList;
+    protected final List<List<Sprite>> spritesList;
     protected boolean goUp;
     protected boolean goDown;
     protected boolean goLeft;
@@ -17,8 +17,8 @@ public abstract class AnimatedEntity extends Entity {
     protected double speed;
     protected int direction = 3;
     protected boolean canMove;
-    public boolean isRemoved;
-    protected int frame = 0;
+    private boolean removed;
+    private int frame = 0;
 
     /**
      * Initialize object.
@@ -32,10 +32,18 @@ public abstract class AnimatedEntity extends Entity {
         spritesList = new ArrayList<>();
     }
 
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public void remove() {
+        removed = true;
+    }
+
     public void update() {
         double dx = 0, dy = 0;
 
-        if (isRemoved) {
+        if (removed) {
             direction = 4;
             deadAnimate();
             return;
@@ -90,7 +98,7 @@ public abstract class AnimatedEntity extends Entity {
         render();
     }
 
-    private void moveBy(double dx, double dy) {
+    protected void moveBy(double dx, double dy) {
         if (dx == 0 && dy == 0) return;
 
         double x = this.x + dx;
@@ -118,7 +126,7 @@ public abstract class AnimatedEntity extends Entity {
             return false;
         }
 
-        int spriteSize = Sprite.SCALED_SIZE;
+        int spriteSize = Sprite.getScaledSize();
         canMove = !(x < e.getX() + spriteSize &&
                 x + spriteSize > e.getX() &&
                 y < e.getY() + spriteSize &&

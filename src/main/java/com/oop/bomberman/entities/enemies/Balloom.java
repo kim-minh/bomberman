@@ -14,9 +14,9 @@ public class Balloom extends Enemy {
      * @param y coordinate y
      */
     public Balloom(double x, double y) {
-        super(x, y, false);
+        super(x, y, 100, false);
         ai = new LowAI(5);
-        speed = 0.5;
+        speed = 1;
 
         //Initialize left animation sprites
         List<Sprite> left = new ArrayList<>();

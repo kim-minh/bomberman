@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Flamepass extends Powerup{
+public class Flamepass extends PowerUp {
     /**
      * Initialize object.
      *
@@ -21,6 +21,7 @@ public class Flamepass extends Powerup{
 
     @Override
     public void activatePower(Player player) {
+        playSound();
         player.setFlamepass(true);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {

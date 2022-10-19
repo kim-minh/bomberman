@@ -1,7 +1,7 @@
 package com.oop.bomberman.entities.enemies;
 
-import com.oop.bomberman.Game;
 import com.oop.bomberman.entities.enemies.AI.MediumAI;
+import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
@@ -15,11 +15,11 @@ public class Oneal extends Enemy {
      * @param x coordinate x
      * @param y coordinate y
      */
-    public Oneal(double x, double y) {
-        super(x, y, false);
-        speed = 1.5;
+    public Oneal(double x, double y, Player player) {
+        super(x, y, 200, false);
+        speed = 2;
 
-        ai = new MediumAI(Game.getPlayer(), this, 1);
+        ai = new MediumAI(player, this, 1);
 
         List<Sprite> left = new ArrayList<>();
         left.add(Sprite.oneal_left1);

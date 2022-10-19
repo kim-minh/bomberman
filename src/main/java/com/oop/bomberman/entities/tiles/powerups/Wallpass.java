@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Wallpass extends Powerup {
+public class Wallpass extends PowerUp {
     /**
      * Initialize object.
      *
@@ -21,6 +21,7 @@ public class Wallpass extends Powerup {
 
     @Override
     public void activatePower(Player player) {
+        playSound();
         player.setWallpass(true);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {

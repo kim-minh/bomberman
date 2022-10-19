@@ -33,13 +33,9 @@
 -->
 
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.layout.AnchorPane?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oop.bomberman.BombermanController">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oop.bomberman.BombermanController">
    <children>
       <MenuBar prefHeight="28.0" prefWidth="392.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <menus>
@@ -61,6 +57,11 @@
             </Menu>
          </menus>
       </MenuBar>
-      <Canvas fx:id="canvas" height="572.0" layoutY="28.0" width="800.0" />
+      <Canvas fx:id="banner" height="35.0" width="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+      <Pane fx:id="pane" layoutY="28.0" prefHeight="538.0" prefWidth="800.0" AnchorPane.topAnchor="62.0">
+         <children>
+            <Canvas fx:id="canvas" height="538.0" width="800.0" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

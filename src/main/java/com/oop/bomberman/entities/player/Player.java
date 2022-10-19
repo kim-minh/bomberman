@@ -1,14 +1,25 @@
 package com.oop.bomberman.entities.player;
 
+import com.oop.bomberman.Bomberman;
+import com.oop.bomberman.BombermanController;
 import com.oop.bomberman.control.Control;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
+import com.oop.bomberman.entities.enemies.Enemy;
 import com.oop.bomberman.entities.player.bomb.Bomb;
 import com.oop.bomberman.entities.player.bomb.ExplodeDirection;
 import com.oop.bomberman.entities.tiles.Brick;
-import com.oop.bomberman.entities.tiles.powerups.Powerup;
+import com.oop.bomberman.entities.tiles.Portal;
+import com.oop.bomberman.entities.tiles.Tile;
+import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
+import com.oop.bomberman.level.Level;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +27,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Player extends AnimatedEntity {
+    private Pane pane;
+    private Rectangle clip;
+    private final DoubleProperty xProperty;
     private int maxBombs;
+    private static int life = 3;
+    private static boolean activatePortal;
     private boolean increaseRadius;
     private boolean wallpass;
     private boolean flamepass;
+    private boolean bombpass;
 
     /**
      * Initialize object.
@@ -30,7 +47,8 @@ public class Player extends AnimatedEntity {
 
     public Player(double x, double y) {
         super(x, y, false);
-        speed = 1;
+        this.xProperty = new SimpleDoubleProperty();
+        speed = 2;
         maxBombs = 1;
 
         //Initialize up animation sprites
@@ -67,6 +85,44 @@ public class Player extends AnimatedEntity {
         spritesList.add(left);
         spritesList.add(right);
         spritesList.add(dead);
+
+        addCamera();
+    }
+
+    public static void resetLife() {
+        life = 3;
+    }
+
+    public static void decreaseLife() {
+        --life;
+    }
+
+    public static int getLife() {
+        return life;
+    }
+
+    public static boolean activatedPortal() {
+        return activatePortal;
+    }
+
+    private double clampRange() {
+        double value = x - Bomberman.getScene().getWidth() / 2;
+        double max = pane.getWidth() - Bomberman.getScene().getWidth();
+        if (value < 0) {
+            return 0;
+        }
+        return Math.min(value, max);
+    }
+
+    private void addCamera() {
+        pane = BombermanController.getPane();
+        clip = new Rectangle();
+
+        clip.widthProperty().bind(Bomberman.getScene().widthProperty());
+        clip.heightProperty().bind(Bomberman.getScene().heightProperty());
+
+        pane.setClip(clip);
+        pane.translateXProperty().bind(clip.xProperty().multiply(-1));
     }
 
     public void increaseMaxBombs() {
@@ -97,15 +153,31 @@ public class Player extends AnimatedEntity {
         this.flamepass = flamepass;
     }
 
+    public void setBombpass(boolean bombpass) {
+        this.bombpass = bombpass;
+    }
+
     public boolean canPassFlame() {
         return flamepass;
     }
 
+    private void placeBomb() {
+        double bombX = Math.round(x / Sprite.getScaledSize()) * Sprite.getScaledSize();
+        double bombY = Math.round(y / Sprite.getScaledSize()) * Sprite.getScaledSize();
+        new Bomb(bombX, bombY, increaseRadius);
+    }
+
+    @Override
+    protected void moveBy(double dx, double dy) {
+        super.moveBy(dx, dy);
+        xProperty.set(x);
+
+        Level.xProperty().bind(Bindings.createDoubleBinding(this::clampRange, xProperty));
+        clip.xProperty().bind(Bindings.createDoubleBinding(this::clampRange, xProperty, pane.widthProperty()));
+    }
+
     @Override
     public boolean collide(Entity e, double x, double y) {
-        if (e instanceof Bomb) {
-            return false;
-        }
         if (wallpass && e instanceof Brick) {
             return false;
         }
@@ -114,12 +186,39 @@ public class Player extends AnimatedEntity {
             return false;
         }
 
+        if (bombpass && e instanceof Bomb) {
+            return false;
+        }
+
         boolean collide = super.collide(e, x, y);
 
-        if (collide && e instanceof Powerup && ((Powerup) e).canActivate()) {
-            ((Powerup) e).activatePower(this);
+        if (e instanceof Tile) {
+            clear();
+            this.x = Math.round(this.x / Sprite.getScaledSize()) * Sprite.getScaledSize();
+            this.y = Math.round(this.y/ Sprite.getScaledSize()) * Sprite.getScaledSize();
+        }
+
+        if (collide && e instanceof Enemy) {
+            remove();
+        }
+
+        if (e instanceof Bomb && !((Bomb) e).passedBomb()) {
+            if (this.getX() <= e.getX() - Sprite.getScaledSize()
+                    || this.getX() >= e.getX() + Sprite.getScaledSize()
+                    || this.getY() <= e.getY() - Sprite.getScaledSize()
+                    || this.getY() >= e.getY() + Sprite.getScaledSize()) {
+                ((Bomb) e).setPassedBomb(true);
+                return true;
+            }
+            return false;
+        }
+
+        if (collide && e instanceof PowerUp && ((PowerUp) e).canActivate()) {
+            ((PowerUp) e).activatePower(this);
             toRemove.add(e);
         }
+
+        activatePortal = collide && e instanceof Portal && ((Portal) e).canActivate();
         return collide;
     }
 
@@ -130,8 +229,8 @@ public class Player extends AnimatedEntity {
         goDown = Control.down;
         goLeft = Control.left;
         goRight = Control.right;
-        if (Control.bomb && Bomb.bombCount < maxBombs) {
-            new Bomb(x, y, increaseRadius);
+        if (Control.bomb && Bomb.getBombCount() < maxBombs) {
+            placeBomb();
             Control.bomb = false;
         }
         super.update();

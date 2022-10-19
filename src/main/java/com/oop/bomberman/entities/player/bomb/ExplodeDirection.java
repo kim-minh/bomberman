@@ -1,10 +1,16 @@
 package com.oop.bomberman.entities.player.bomb;
 
+import com.oop.bomberman.Game;
+import com.oop.bomberman.control.Audio;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.entities.Entity;
+import com.oop.bomberman.entities.Message;
+import com.oop.bomberman.entities.enemies.Enemy;
 import com.oop.bomberman.entities.player.Player;
+import com.oop.bomberman.entities.tiles.Brick;
+import com.oop.bomberman.entities.tiles.Portal;
 import com.oop.bomberman.entities.tiles.Wall;
-import com.oop.bomberman.entities.tiles.powerups.Powerup;
+import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
 import javafx.application.Platform;
 
@@ -15,6 +21,7 @@ import java.util.TimerTask;
 
 public class ExplodeDirection extends AnimatedEntity {
     private boolean flag;
+    private boolean flag2;
 
     /**
      * Initialize object.
@@ -77,10 +84,16 @@ public class ExplodeDirection extends AnimatedEntity {
         };
         Timer disappearTimer = new Timer();
         disappearTimer.schedule(disappearTask, 500L);
+
+        update();
     }
 
     public boolean flagged() {
         return flag;
+    }
+
+    public boolean flagged2() {
+        return !flag && !flag2;
     }
 
     public boolean collide(Entity e) {
@@ -96,10 +109,27 @@ public class ExplodeDirection extends AnimatedEntity {
             if (collide(e)) {
                 if (e instanceof Wall) {
                     flag = true;
-                } else if (e instanceof Powerup) {
-                    ((Powerup) e).setCanActivate(true);
-                } else {
-                    ((AnimatedEntity) e).isRemoved = true;
+                } else if (e instanceof PowerUp) {
+                    ((PowerUp) e).setCanActivate(true);
+                } else if (e instanceof Portal) {
+                    ((Portal) e).setCanActivate(true);
+                } else if (e instanceof AnimatedEntity) {
+                    boolean isRemoved = ((AnimatedEntity) e).isRemoved();
+                    if (e instanceof Brick) {
+                        flag2 = true;
+                    }
+                    if (e instanceof Enemy) {
+                        new Message(e.getX(), e.getY(), "+" + ((Enemy) e).getPoint());
+                        if (!isRemoved) {
+                            Game.addTotalPoints(((Enemy) e).getPoint());
+                            Audio audio = new Audio("mobDead.wav");
+                            audio.playFx();
+                        }
+                    }
+                    if (e instanceof Player) {
+                        new Message(e.getX(), e.getY(), "-1");
+                    }
+                    ((AnimatedEntity) e).remove();
                 }
             }
         }

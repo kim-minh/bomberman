@@ -3,7 +3,7 @@ package com.oop.bomberman.entities.tiles.powerups;
 import com.oop.bomberman.entities.player.Player;
 import com.oop.bomberman.graphics.Sprite;
 
-public class BombUp extends Powerup{
+public class BombUp extends PowerUp {
     /**
      * Initialize object.
      *
@@ -18,6 +18,7 @@ public class BombUp extends Powerup{
 
     @Override
     public void activatePower(Player player) {
+        playSound();
         player.increaseMaxBombs();
     }
 }
