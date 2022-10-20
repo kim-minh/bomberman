@@ -134,6 +134,17 @@ public class Sprite {
 
     public static final Sprite pontan_dead = new Sprite(12, 8);
 
+    //Tiger
+    public static final Sprite tiger_left1 = new Sprite(4, 5);
+    public static final Sprite tiger_left2 = new Sprite(4, 6);
+    public static final Sprite tiger_left3 = new Sprite(4, 7);
+
+    public static final Sprite tiger_right1 = new Sprite(5, 5);
+    public static final Sprite tiger_right2 = new Sprite(5, 6);
+    public static final Sprite tiger_right3 = new Sprite(5, 7);
+
+    public static final Sprite tiger_dead = new Sprite(4, 8);
+
     //ALL
     public static final Sprite mob_dead1 = new Sprite(15, 0);
     public static final Sprite mob_dead2 = new Sprite(15, 1);
