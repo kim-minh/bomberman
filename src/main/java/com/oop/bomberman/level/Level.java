@@ -6,15 +6,13 @@ import com.oop.bomberman.control.Audio;
 import com.oop.bomberman.entities.Entity;
 import com.oop.bomberman.entities.player.Player;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
+import javafx.animation.PauseTransition;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import javafx.util.Duration;
 
 public class Level {
     private final AnimationTimer animation;
@@ -45,8 +43,9 @@ public class Level {
     public void nextLevel() {
         Audio audio = new Audio("clearLevel.wav");
         audio.playFx();
+        ++currentLevel;
         transition();
-        fileLevel.loadLevel(++currentLevel);
+        fileLevel.loadLevel(currentLevel);
     }
 
     public void restartLevel() {
@@ -70,17 +69,13 @@ public class Level {
         gc.setFont(new Font(12));
 
         animation.stop();
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-                    fileLevel.createEntities();
-                    animation.start();
-                });
-            }
-        };
-        timer.schedule(task, 3000);
+
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(2));
+        pauseTransition.setOnFinished(event -> {
+            gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+            fileLevel.createEntities();
+            animation.start();
+        });
+        pauseTransition.play();
     }
 }
