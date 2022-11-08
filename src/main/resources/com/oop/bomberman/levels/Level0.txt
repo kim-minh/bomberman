@@ -1,0 +1,39 @@
+1 13 31
+###############################
+#p     **  6   *   *  * * *   #
+# # # #*# # #*#*# # # #*#*#*# #
+#         ***  *   5  *   * * #
+# # # # # #*# # #*#*# # # # #*#
+#f  w      x **1 *  *  2     3#
+# # # # # # # # # #*#1#*# # # #
+#b  d      e  *      *        #
+# # # # #*# # # #*#*# # # # # #
+#s    **  *       *           #
+# #*# # # # # # #*# # # # # # #
+#           *4  *  *          #
+###############################
+
+Meta data:
+(Number or Level) (Rows) (Columns)
+
+Tiles:
+# - Wall
+* - Brick
+x - Portal
+
+Mobs:
+p - Player
+1 - Balloom
+2 - Oneal
+3 - Dahl
+4 - Minvo
+5 - Kondoria
+6 - Tiger
+
+Powerups:
+b - Powerup Bombs
+f - Powerup Flames
+s - Powerup Speed
+d - Powerup Flame Pass
+e - Powerup Bomb Pass
+w - Powerup Wallpass
