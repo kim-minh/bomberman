@@ -14,17 +14,16 @@ import com.oop.bomberman.entities.tiles.Tile;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
 import com.oop.bomberman.level.Level;
-import javafx.application.Platform;
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Player extends AnimatedEntity {
     private Pane pane;
@@ -135,14 +134,9 @@ public class Player extends AnimatedEntity {
 
     public void increaseSpeed() {
         ++speed;
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> --speed);
-            }
-        };
-        timer.schedule(task, 15000);
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(20));
+        pauseTransition.setOnFinished(event -> --speed);
+        pauseTransition.play();
     }
 
     public void setWallpass(boolean wallpass) {

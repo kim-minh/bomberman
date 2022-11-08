@@ -1,11 +1,9 @@
 package com.oop.bomberman.entities;
 
 import com.oop.bomberman.graphics.Sprite;
-import javafx.application.Platform;
+import javafx.animation.PauseTransition;
 import javafx.scene.paint.Color;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import javafx.util.Duration;
 
 public class Message extends Entity {
     private final String msg;
@@ -14,16 +12,10 @@ public class Message extends Entity {
         super(x + (Sprite.getScaledSize() / 5.0), y + (Sprite.getScaledSize() / 4.0), true);
         gc.setFill(Color.WHITE);
         this.msg = msg;
-        Message message = this;
 
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> toRemove.add(message));
-            }
-        };
-        timer.schedule(task, 400);
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(400));
+        pauseTransition.setOnFinished(event -> toRemove.add(this));
+        pauseTransition.play();
     }
 
     @Override

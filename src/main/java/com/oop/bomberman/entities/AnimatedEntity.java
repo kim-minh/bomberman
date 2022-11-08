@@ -1,11 +1,11 @@
 package com.oop.bomberman.entities;
 
 import com.oop.bomberman.graphics.Sprite;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public abstract class AnimatedEntity extends Entity {
     protected final List<List<Sprite>> spritesList;
@@ -85,15 +85,9 @@ public abstract class AnimatedEntity extends Entity {
     }
 
     protected void deadAnimate() {
-        Entity entity = this;
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                toRemove.add(entity);
-            }
-        };
-        timer.schedule(task, 400);
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(500));
+        pauseTransition.setOnFinished(event -> toRemove.add(this));
+        pauseTransition.play();
         animate();
         render();
     }

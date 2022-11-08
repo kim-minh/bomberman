@@ -2,12 +2,11 @@ package com.oop.bomberman.entities.enemies;
 
 import com.oop.bomberman.entities.enemies.AI.LowAI;
 import com.oop.bomberman.graphics.Sprite;
-import javafx.application.Platform;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Tiger extends Enemy {
     private boolean spawned;
@@ -51,20 +50,17 @@ public class Tiger extends Enemy {
     public void update() {
         if (isRemoved() && !spawned) {
             spawned = true;
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    double spawnedX = Math.round(x / Sprite.getScaledSize()) * Sprite.getScaledSize();
-                    double spawnedY = Math.round(y / Sprite.getScaledSize()) * Sprite.getScaledSize();
-                    Platform.runLater(() -> {
-                        toAdd.add(new SpawnedTiger(spawnedX, spawnedY));
-                        toAdd.add(new SpawnedTiger(spawnedX + Sprite.getScaledSize(), spawnedY));
-                        toAdd.add(new SpawnedTiger(spawnedX - Sprite.getScaledSize(), spawnedY));
-                    });
-                }
-            };
-            timer.schedule(task, 600);
+
+            double spawnedX = Math.round(x / Sprite.getScaledSize()) * Sprite.getScaledSize();
+            double spawnedY = Math.round(y / Sprite.getScaledSize()) * Sprite.getScaledSize();
+
+            PauseTransition pauseTransition = new PauseTransition(Duration.millis(600));
+            pauseTransition.setOnFinished(event -> {
+                toAdd.add(new SpawnedTiger(spawnedX, spawnedY));
+                toAdd.add(new SpawnedTiger(spawnedX + Sprite.getScaledSize(), spawnedY));
+                toAdd.add(new SpawnedTiger(spawnedX - Sprite.getScaledSize(), spawnedY));
+            });
+            pauseTransition.play();
         }
         super.update();
     }

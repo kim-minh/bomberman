@@ -12,12 +12,11 @@ import com.oop.bomberman.entities.tiles.Portal;
 import com.oop.bomberman.entities.tiles.Wall;
 import com.oop.bomberman.entities.tiles.powerups.PowerUp;
 import com.oop.bomberman.graphics.Sprite;
-import javafx.application.Platform;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ExplodeDirection extends AnimatedEntity {
     private boolean flag;
@@ -32,7 +31,6 @@ public class ExplodeDirection extends AnimatedEntity {
     public ExplodeDirection(double x, double y, int direction) {
         super(x, y, true);
         this.direction = direction;
-        ExplodeDirection explodeDirection = this;
 
         List<Sprite> explode = new ArrayList<>();
         explode.add(Sprite.bomb_exploded);
@@ -76,14 +74,9 @@ public class ExplodeDirection extends AnimatedEntity {
         downLast.add(Sprite.explosion_vertical_down_last2);
         spritesList.add(downLast);
 
-        TimerTask disappearTask = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> toRemove.add(explodeDirection));
-            }
-        };
-        Timer disappearTimer = new Timer();
-        disappearTimer.schedule(disappearTask, 500L);
+        PauseTransition disappear = new PauseTransition(Duration.millis(500));
+        disappear.setOnFinished(event -> toRemove.add(this));
+        disappear.play();
 
         update();
     }

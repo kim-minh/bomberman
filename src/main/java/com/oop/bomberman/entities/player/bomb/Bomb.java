@@ -3,12 +3,11 @@ package com.oop.bomberman.entities.player.bomb;
 import com.oop.bomberman.control.Audio;
 import com.oop.bomberman.entities.AnimatedEntity;
 import com.oop.bomberman.graphics.Sprite;
-import javafx.application.Platform;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Bomb extends AnimatedEntity {
     private static int bombCount;
@@ -22,23 +21,17 @@ public class Bomb extends AnimatedEntity {
      */
     public Bomb(double x, double y, boolean increaseRadius) {
         super(x, y, true);
-        final Bomb bomb = this;
         direction = 0;
         ++bombCount;
 
-        TimerTask explodeTask = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    clear();
-                    new Explosion(bomb.getX(), bomb.getY(), increaseRadius);
-                    toRemove.add(bomb);
-                    --bombCount;
-                });
-            }
-        };
-        Timer explodeTimer = new Timer();
-        explodeTimer.schedule(explodeTask, 2500L);
+        PauseTransition explode = new PauseTransition(Duration.seconds(2.5));
+        explode.setOnFinished(event -> {
+            clear();
+            new Explosion(this.getX(), this.getY(), increaseRadius);
+            toRemove.add(this);
+            --bombCount;
+        });
+        explode.play();
 
         //Animation
         List<Sprite> animation = new ArrayList<>();
